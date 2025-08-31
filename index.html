@@ -4,110 +4,158 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Reddit Hustle Project v1.0</title>
-  <!-- Use Tailwind CSS from CDN with our custom config -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    // Configure Tailwind with custom theme colors
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            // Reddit Orange
             'reddit-orange': '#FF4500',
             'reddit-orange-dark': '#cc3700',
-            // Hustle Neon Accent (e.g., Electric Blue or Purple)
-            'hustle-accent': '#00f7ff', // Cyan/Teal
-            'hustle-accent-dark': '#00c4cc',
-            // Darker background for "gritty" feel
+            'hustle-accent': '#4dccf3', // Light blue
+            'hustle-accent-dark': '#3aa8c7',
             'dark-bg': '#121212',
-            'card-bg': '#1a2a3a', // Darker blue-ish base for cards
-            // Muted text (cooler)
+            'card-bg': '#1a2a3a',
             'text-muted': '#a0c8e0',
-            // Success/Growth Green (Hustle Positive Outcome)
             'growth-green': '#10b981',
           }
         }
       }
     }
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&family=Ubuntu+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    /* Base styles - adjust for new theme */
     :root {
       --bg-dark: #121212;
-      --card-bg: #1a2a3a; /* Darker blue-ish base */
-      --text-primary: #e0f7ff; /* Brighter, cooler text */
-      --text-muted: #a0c8e0; /* Cooler muted text */
-      --highlight-primary: #4dccf3; /* Vibrant light blue */
-      --highlight-secondary: #ff4500; /* Reddit orange */
-      --border-color: #2a4a6a; /* Cooler border */
-      /* --- New Glow Variables --- */
-      --card-glow-color: #4dccf380; /* Light blue glow, semi-transparent */
-      --text-glow-color: #4dccf3;   /* Light blue text glow */
+      --card-bg: #1a2a3a;
+      --text-primary: #e0f7ff;
+      --text-muted: #a0c8e0;
+      --highlight-primary: #4dccf3;
+      --highlight-secondary: #ff4500;
+      --border-color: #2a4a6a;
+      --card-glow-color: #4dccf340;
+      --text-glow-color: #4dccf3;
     }
 
     body {
       background-color: var(--bg-dark);
       color: var(--text-primary);
       font-family: 'Ubuntu', sans-serif;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      position: relative;
       overflow-x: hidden;
     }
 
+    /* --- Glassmorphism Wavy Background --- */
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      top: -50%;  /* Extend to cover potential movement */
+      left: -50%;
+      width: 200%; /* Extend to cover potential movement */
+      height: 200%;
+      z-index: 0; /* Behind content */
+    }
+
+    /* Base layer with subtle gradient */
+    body::before {
+      background: radial-gradient(ellipse at center, rgba(44, 83, 100, 0.15) 0%, rgba(18, 32, 39, 0) 70%);
+      /* No animation on base layer for stability */
+    }
+
+    /* Animated wavy layers for glass effect */
+    body::after {
+      /* Layered gradients for wavy highlights/shadows */
+      background:
+        radial-gradient(ellipse at 30% 40%, rgba(77, 204, 243, 0.1) 0%, transparent 25%),
+        radial-gradient(ellipse at 70% 60%, rgba(255, 69, 0, 0.08) 0%, transparent 25%),
+        radial-gradient(ellipse at 50% 30%, rgba(77, 204, 243, 0.07) 0%, transparent 30%),
+        radial-gradient(ellipse at 20% 80%, rgba(255, 69, 0, 0.05) 0%, transparent 30%);
+
+      /* Animate position and scale for wavy, fluid motion */
+      animation: wavyFlow 25s ease-in-out infinite alternate;
+      /* Apply blur for the frosted glass look */
+      filter: blur(40px); /* Increased blur for softer effect */
+      -webkit-filter: blur(40px);
+      opacity: 0.7; /* Adjust overall opacity of the effect */
+    }
+
+    /* Keyframes for wavy, fluid movement */
+    @keyframes wavyFlow {
+      0%, 100% {
+        transform:
+          translate(0, 0)
+          scale(1);
+        /* Slightly adjust background positions for subtle shift */
+        background-position:
+          30% 40%,
+          70% 60%,
+          50% 30%,
+          20% 80%;
+        background-size:
+          60% 60%,
+          50% 50%,
+          70% 70%,
+          65% 65%;
+      }
+      25% {
+        transform:
+          translate(-1%, 0.5%)
+          scale(1.01);
+        background-position:
+          32% 38%,
+          68% 62%,
+          48% 32%,
+          22% 78%;
+        background-size:
+          62% 58%,
+          48% 52%,
+          68% 72%,
+          63% 67%;
+      }
+      50% {
+        transform:
+          translate(0.5%, -1%)
+          scale(0.995);
+        background-position:
+          28% 42%,
+          72% 58%,
+          52% 28%,
+          18% 82%;
+        background-size:
+          58% 62%,
+          52% 48%,
+          72% 68%,
+          67% 63%;
+      }
+      75% {
+        transform:
+          translate(-0.5%, 0.8%)
+          scale(1.005);
+        background-position:
+          31% 39%,
+          69% 61%,
+          49% 31%,
+          21% 79%;
+        background-size:
+          61% 59%,
+          49% 51%,
+          69% 71%,
+          64% 66%;
+      }
+    }
+    /* --- End Glassmorphism Background --- */
+
+
     .content-wrapper {
       position: relative;
-      z-index: 10;
-    }
-
-    /* Background Blobs - Adjusted colors */
-    .background-blobs {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      z-index: 0;
-    }
-
-    .blob1, .blob2 {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.3;
-    }
-
-    .blob1 {
-      width: 600px;
-      height: 600px;
-      background: var(--highlight-primary);
-      top: -20%;
-      left: -10%;
-      animation: float 15s infinite ease-in-out;
-    }
-
-    .blob2 {
-      width: 500px;
-      height: 500px;
-      background: var(--highlight-secondary);
-      bottom: -20%;
-      right: -10%;
-      animation: float 12s infinite ease-in-out reverse;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translate(0, 0); }
-      50% { transform: translate(20px, 20px); }
-    }
-
-    /* Particles.js container */
-    #particles-js {
-      position: fixed;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      z-index: 1;
+      z-index: 10; /* Content above background effects */
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
     /* Typography */
@@ -121,7 +169,6 @@
 
     .highlight {
       color: var(--highlight-primary);
-      /* Add text glow */
       text-shadow: 0 0 8px var(--text-glow-color);
     }
 
@@ -136,8 +183,6 @@
       cursor: pointer;
       transition: all 0.3s ease, transform 0.1s ease;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-      position: relative;
-      overflow: hidden;
     }
 
     .sync-button:hover {
@@ -181,12 +226,11 @@
       stroke-dashoffset: 25;
     }
 
-    /* Cards - Enhanced for 3D, Theme, and Glow */
+    /* Cards - Enhanced for Theme and Glow */
     .page-card {
       background-color: var(--card-bg);
       border-radius: 12px;
       overflow: hidden;
-      /* --- Base shadow, border, and glow --- */
       box-shadow: 0 0 15px var(--card-glow-color), 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
       border: 1px solid var(--border-color);
       transition: transform 0.2s ease, box-shadow 0.3s ease, border-color 0.3s ease;
@@ -199,12 +243,10 @@
 
     .page-card:hover {
        transform: perspective(1000px) scale3d(1.03, 1.03, 1.03);
-       /* --- Enhanced glow effect on hover --- */
        box-shadow: 0 0 25px var(--card-glow-color), 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
        border-color: var(--highlight-primary);
     }
 
-    /* Card Image */
     .page-card img {
       transition: transform 0.3s ease;
     }
@@ -213,7 +255,6 @@
       transform: scale(1.05);
     }
 
-    /* Card Content */
     .page-card .p-6 {
       flex-grow: 1;
       display: flex;
@@ -223,13 +264,11 @@
     .page-card h3 {
       margin-bottom: 0.5rem;
       transition: color 0.2s ease;
-      /* Add subtle text glow to title */
       text-shadow: 0 0 4px rgba(77, 204, 243, 0.3);
     }
 
     .page-card:hover h3 {
       color: var(--highlight-primary);
-      /* Enhance text glow on hover */
       text-shadow: 0 0 8px var(--text-glow-color);
     }
 
@@ -243,17 +282,14 @@
       color: var(--growth-green);
       font-weight: bold;
       transition: color 0.2s ease;
-      /* Add subtle text glow to link text */
       text-shadow: 0 0 4px rgba(16, 185, 129, 0.3);
     }
 
     .page-card:hover .text-sm {
       color: var(--highlight-primary);
-      /* Enhance text glow on hover */
       text-shadow: 0 0 8px var(--text-glow-color);
     }
 
-    /* Header/Footer adjustments */
     header h1 {
         background: linear-gradient(to right, var(--highlight-secondary), var(--highlight-primary));
         -webkit-background-clip: text;
@@ -261,7 +297,6 @@
         background-clip: text;
         text-fill-color: transparent;
         animation: shimmer 3s infinite;
-        /* Add text glow to main header */
         text-shadow: 0 0 15px var(--text-glow-color);
     }
 
@@ -272,73 +307,49 @@
 
     footer {
         border-top: 1px solid var(--border-color);
+        margin-top: 2rem;
+        padding-top: 1rem;
     }
 
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-        .blob1, .blob2 {
-            filter: blur(60px);
-        }
+    /* Grid adjustments */
+    #pages-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1rem;
     }
 
   </style>
 </head>
 <body class="antialiased">
-  <div class="background-blobs">
-    <div class="blob1"></div>
-    <div class="blob2"></div>
-  </div>
-  <div id="particles-js"></div>
-
-  <div class="content-wrapper container mx-auto p-4 md:p-8 max-w-6xl">
-    <header class="text-center mb-12 pt-8 sm:pt-16">
-      <h1 class="text-4xl md:text-6xl font-bold">Reddit Hustle Project</h1>
-      <p class="text-lg mt-2 text-muted">Quick Summaries</p>
-      <div class="mt-8">
+  <!-- Main Content -->
+  <div class="content-wrapper">
+    <header class="text-center mb-8 pt-4">
+      <h1 class="text-4xl md:text-5xl font-bold">Reddit Hustle Project</h1>
+      <p class="text-lg mt-2 text-muted">Automated Guides, Tools & Notes for the Grind.</p>
+      <div class="mt-6">
         <button id="sync-button" class="sync-button font-bold text-lg">
           Sync Sheets
         </button>
       </div>
     </header>
 
-    <main id="pages-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <div id="initial-prompt" class="text-center text-muted md:col-span-2 lg:col-span-3 py-10">
+    <main id="pages-grid">
+      <div id="initial-prompt" class="text-center text-muted py-10 col-span-full">
         <p>Click the <span class="highlight">Sync Sheets</span> button to load content from the repository.</p>
       </div>
     </main>
 
-    <footer class="text-center mt-12 py-8 text-sm text-muted border-t border-border-color">
-      <p>&copy; 2025 Blayze_Quest </p>
+    <footer class="text-center py-6 text-sm text-muted">
+      <p>&copy; 2025 Blayze_Quest | Auto-Generated via GitHub API.</p>
     </footer>
   </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      // --- Particle.js Configuration (Hardcoded for single theme) ---
-      function loadParticles() {
-        if (window.pJSDom?.length) {
-          window.pJSDom[0].pJS.fn.vendors.destroypJS();
-          window.pJSDom = [];
-        }
-        particlesJS('particles-js', {
-          particles: {
-            number: { value: 50, density: { enable: true, value_area: 800 } },
-            color: { value: '#4dccf3' }, // Light blue
-            shape: { type: "circle" },
-            opacity: { value: 0.5 },
-            size: { value: 3, random: true },
-            line_linked: { enable: true, distance: 150, color: '#ff4500', opacity: 0.4, width: 1 }, // Reddit orange
-            move: { enable: true, speed: 1, out_mode: "out" }
-          },
-          interactivity: { detect_on: "canvas", events: { onhover: { enable: true, mode: "grab" } } },
-          retina_detect: true
-        });
-      }
-      loadParticles();
 
-      // --- Script Logic ---
+      // --- Script Logic (Simplified) ---
       const GITHUB_REPO = 'onqu3st/redditPages';
-      // Ensure URL is correctly formatted without extra spaces
       const PAGES_DIR_API = `https://api.github.com/repos/${GITHUB_REPO}/contents/html`;
 
       const grid = document.getElementById('pages-grid');
@@ -347,7 +358,7 @@
       let htmlFilesCache = [];
 
       const loaderHTML = `
-        <div class="loader-container">
+        <div class="loader-container col-span-full">
           <svg class="loader-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle class="track" cx="12" cy="12" r="10" stroke-width="2"/>
             <path class="spinner" d="M12 2A10 10 0 0 1 22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -365,65 +376,71 @@
           .join(' ');
       }
 
-      function createDescription(title) {
-        const topics = [
-          "grind", "strategy", "insight", "tactic", "blueprint", "playbook",
-          "hack", "pro tip", "deep dive", "breakdown"
-        ];
-        const randomTopic = topics[Math.floor(Math.random() * topics.length)];
-        return `Your ${randomTopic} on "${title}". Click to unlock the knowledge.`;
+      function extractDescription(htmlString) {
+        const pMatch = htmlString.match(/<p[^>]*>(.*?)<\/p>/i);
+        if (pMatch && pMatch[1].trim()) {
+            let desc = pMatch[1].replace(/<[^>]*>/g, '').trim();
+            return desc.length > 160 ? desc.substring(0, 157) + '...' : desc;
+        }
+        const hMatch = htmlString.match(/<h[1-6][^>]*>(.*?)<\/h[1-6]>/i);
+        if (hMatch && hMatch[1].trim()) {
+            let desc = hMatch[1].replace(/<[^>]*>/g, '').trim();
+            return desc.length > 160 ? desc.substring(0, 157) + '...' : desc;
+        }
+        return "Click to view detailed content.";
       }
 
-      function createPageCard(page) {
+      async function createPageCard(page) {
         const title = formatTitle(page.name);
-        const description = createDescription(title);
-        // Fix URL construction - remove extra spaces
         const pageUrl = `https://onqu3st.github.io/redditPages/html/${page.name}`;
-        
-        const bgColor = '1a2a3a'; // Card background from our theme
-        const textColor = '4dccf3'; // Light blue accent from our theme
-        // Fix URL construction - remove extra spaces
+        const bgColor = '1a2a3a';
+        const textColor = '4dccf3';
         const imageUrl = `https://placehold.co/600x400/${bgColor}/${textColor}?text=${encodeURIComponent(title.split(':')[0] || title)}&font=ubuntu`;
 
+        let description = "Loading description...";
+        try {
+            const response = await fetch(pageUrl);
+            if (response.ok) {
+                const htmlText = await response.text();
+                description = extractDescription(htmlText);
+            } else {
+                console.warn(`Failed to fetch content for ${page.name}: ${response.status}`);
+                description = "Description unavailable.";
+            }
+        } catch (err) {
+            console.error(`Error fetching content for ${page.name}:`, err);
+            description = "Description unavailable.";
+        }
+
         return `
-          <a href="${pageUrl}" target="_blank" rel="noopener noreferrer" class="page-card no-underline group block h-full" style="animation-delay: ${Math.random() * 0.5}s">
+          <a href="${pageUrl}" target="_blank" rel="noopener noreferrer" class="page-card no-underline block h-full">
             <div class="overflow-hidden rounded-t-lg">
-              <img src="${imageUrl}" alt="Placeholder for ${title}" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105">
+              <img src="${imageUrl}" alt="Placeholder for ${title}" class="w-full h-48 object-cover transition-transform duration-300">
             </div>
             <div class="p-6 flex flex-col flex-grow">
-              <h3 class="text-xl font-bold text-text-primary group-hover:text-hustle-accent transition-colors duration-200">${title}</h3>
+              <h3 class="text-xl font-bold transition-colors duration-200">${title}</h3>
               <p class="text-muted mt-2 flex-grow">${description}</p>
-              <p class="text-sm mt-4 font-mono text-right text-growth-green group-hover:text-hustle-accent transition-colors duration-200">View Sheet &rarr;</p>
+              <p class="text-sm mt-4 font-mono text-right text-growth-green transition-colors duration-200">View Sheet &rarr;</p>
             </div>
           </a>
         `;
       }
 
-      function init3dCards() {
-        const cards = document.querySelectorAll('.page-card');
-        cards.forEach(card => {
-          card.addEventListener('mousemove', e => {
-            const { width, height, left, top } = card.getBoundingClientRect();
-            const x = e.clientX - left;
-            const y = e.clientY - top;
-            const maxRotate = 8;
-            const rotateX = ((y - height / 2) / (height / 2) * -maxRotate).toFixed(2);
-            const rotateY = ((x - width / 2) / (width / 2) * maxRotate).toFixed(2);
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03,1.03,1.03)`;
-          });
-          card.addEventListener('mouseleave', () => {
-            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1,1,1)';
-          });
-        });
-      }
-
-      function renderPages(files) {
+      async function renderPages(files) {
         if (files.length > 0) {
-          grid.innerHTML = files.map(createPageCard).join('');
-          init3dCards();
-          pagesLoaded = true;
+            grid.innerHTML = '<p class="text-muted text-center py-10 col-span-full">Loading content descriptions...</p>';
+            const cardPromises = files.map(file => createPageCard(file));
+            try {
+                const cardHTMLs = await Promise.all(cardPromises);
+                grid.innerHTML = cardHTMLs.join('');
+                pagesLoaded = true;
+            } catch (err) {
+                console.error("Error generating cards:", err);
+                grid.innerHTML = '<p class="text-red-400 text-center py-10 col-span-full">Error loading card content. Please try again.</p>';
+                pagesLoaded = false;
+            }
         } else {
-          grid.innerHTML = '<p class="text-muted text-center md:col-span-2 lg:col-span-3 py-10">No HTML pages found in the /html directory.</p>';
+          grid.innerHTML = '<p class="text-muted text-center py-10 col-span-full">No HTML pages found in the /html directory.</p>';
           pagesLoaded = false;
         }
       }
@@ -444,13 +461,15 @@
           }
 
           const data = await response.json();
-          console.log("Fetched data:", data);
+          console.log("Fetched ", data);
           htmlFilesCache = data.filter(f => f.type === 'file' && f.name.endsWith('.html'));
           console.log("Filtered HTML files:", htmlFilesCache);
-          renderPages(htmlFilesCache);
+
+          await renderPages(htmlFilesCache);
+
         } catch (err) {
           console.error("Failed to load pages:", err);
-          grid.innerHTML = `<p class="text-red-400 text-center md:col-span-2 lg:col-span-3 py-10">Error fetching sheets: ${err.message}. Check the console for details.</p>`;
+          grid.innerHTML = `<p class="text-red-400 text-center py-10 col-span-full">Error fetching sheets: ${err.message}. Check the console for details.</p>`;
           pagesLoaded = false;
         } finally {
           syncButton.disabled = false;
