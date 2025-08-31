@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Breath Reset: Ancient Healing Breathing Techniques For Modern Chronic Illness</title>
+  <style>
+    :root {
+      --bg: #f0f9ff;
+      --fg: #0c2e4e;
+      --accent: #2a9d8f;
+      --accent-hover: #21867a;
+      --border: #bde0fe;
+      --card-bg: #ffffff;
+      --shadow: rgba(42, 157, 143, 0.15);
+      --success: #2a9d8f;
+      --gradient-start: #a8e6cf;
+      --gradient-end: #2a9d8f;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0d1b2a;
+        --fg: #e0f7fa;
+        --border: #1b263b;
+        --card-bg: #1b263b;
+        --shadow: rgba(0, 0, 0, 0.4);
+        --gradient-start: #1d3557;
+        --gradient-end: #2a9d8f;
+      }
+    }
+
+    [data-theme="dark"] {
+      --bg: #0d1b2a;
+      --fg: #e0f7fa;
+      --border: #1b263b;
+      --card-bg: #1b263b;
+      --shadow: rgba(0, 0, 0, 0.4);
+      --gradient-start: #1d3557;
+      --gradient-end: #2a9d8f;
+    }
+
+    [data-theme="light"] {
+      --bg: #f0f9ff;
+      --fg: #0c2e4e;
+      --border: #bde0fe;
+      --card-bg: #ffffff;
+      --shadow: rgba(42, 157, 143, 0.15);
+      --gradient-start: #a8e6cf;
+      --gradient-end: #2a9d8f;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(42, 157, 143, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(168, 230, 207, 0.1) 0%, transparent 20%);
+      animation: bg-pulse 20s infinite alternate;
+    }
+
+    @keyframes bg-pulse {
+      0% { background-position: 0% 0%; }
+      100% { background-position: 100% 100%; }
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+
+    a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -2px;
+      left: 0;
+      background-color: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    a:hover::after {
+      width: 100%;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 32px;
+      position: relative;
+    }
+
+    header::before {
+      content: "○";
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 32px;
+      color: var(--accent);
+      opacity: 0.7;
+      animation: breathe 4s infinite ease-in-out;
+    }
+
+    @keyframes breathe {
+      0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.7; }
+      50% { transform: translateX(-50%) scale(1.2); opacity: 1; }
+    }
+
+    h1 {
+      font-size: 28px;
+      margin: 0 0 16px;
+      line-height: 1.3;
+      background: linear-gradient(135deg, var(--fg), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: text-glow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes text-glow {
+      0% { filter: brightness(1); }
+      100% { filter: brightness(1.2); }
+    }
+
+    .value-prop {
+      font-size: 18px;
+      margin-bottom: 24px;
+      color: var(--fg);
+      position: relative;
+      padding: 20px;
+      border-radius: 12px;
+      background: var(--card-bg);
+      box-shadow: 0 4px 12px var(--shadow);
+      border: 1px solid var(--border);
+    }
+
+    .value-prop::before {
+      content: "❝";
+      position: absolute;
+      top: -15px;
+      left: 20px;
+      font-size: 40px;
+      color: var(--accent);
+      opacity: 0.3;
+    }
+
+    .incentive {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      color: white;
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 14px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 10px rgba(42, 157, 143, 0.3);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); box-shadow: 0 4px 10px rgba(42, 157, 143, 0.3); }
+      50% { transform: scale(1.03); box-shadow: 0 6px 15px rgba(42, 157, 143, 0.5); }
+      100% { transform: scale(1); box-shadow: 0 4px 10px rgba(42, 157, 143, 0.3); }
+    }
+
+    ul {
+      padding-left: 0;
+      list-style: none;
+      margin: 0 0 32px;
+    }
+
+    li {
+      margin-bottom: 16px;
+      padding: 16px;
+      background: var(--card-bg);
+      border-radius: 10px;
+      box-shadow: 0 3px 8px var(--shadow);
+      border: 1px solid var(--border);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    li:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 15px var(--shadow);
+    }
+
+    li::before {
+      content: "➤";
+      color: var(--accent);
+      margin-right: 10px;
+      font-weight: bold;
+    }
+
+    li strong {
+      color: var(--accent);
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .who-for {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 32px;
+      box-shadow: 0 5px 15px var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .who-for::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
+    }
+
+    .who-for h3 {
+      margin-top: 0;
+      color: var(--accent);
+      font-size: 20px;
+    }
+
+    .conditions {
+      font-size: 14px;
+      color: #777;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px dashed var(--border);
+    }
+
+    .cta-button {
+      display: block;
+      width: 100%;
+      padding: 18px;
+      font-size: 18px;
+      font-weight: bold;
+      text-align: center;
+      background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(42, 157, 143, 0.4);
+      margin-bottom: 32px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(42, 157, 143, 0.6);
+    }
+
+    .cta-button:active {
+      transform: translateY(1px);
+    }
+
+    .cta-button::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: rgba(255, 255, 255, 0.1);
+      transform: rotate(30deg);
+      transition: all 0.6s ease;
+    }
+
+    .cta-button:hover::after {
+      transform: rotate(30deg) translate(20%, 20%);
+    }
+
+    .email-form {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 32px;
+      box-shadow: 0 5px 15px var(--shadow);
+      position: relative;
+    }
+
+    .email-form::before {
+      content: "✉";
+      position: absolute;
+      top: -15px;
+      right: 20px;
+      font-size: 24px;
+      background: var(--accent);
+      color: white;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .email-form input {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 16px;
+      box-sizing: border-box;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      background: var(--bg);
+      color: var(--fg);
+    }
+
+    .email-form input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(42, 157, 143, 0.2);
+    }
+
+    .email-form button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, var(--accent), #1d7874);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+      font-weight: 600;
+    }
+
+    .email-form button:hover {
+      background: linear-gradient(135deg, var(--accent-hover), #175e5a);
+    }
+
+    .success-message {
+      color: var(--success);
+      font-weight: bold;
+      margin-top: 16px;
+      display: none;
+      text-align: center;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    footer {
+      font-size: 12px;
+      color: #777;
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 16px;
+      }
+      
+      h1 {
+        font-size: 24px;
+      }
+      
+      .value-prop {
+        font-size: 16px;
+        padding: 16px;
+      }
+      
+      li {
+        padding: 14px;
+      }
+    }
+  </style>
+</head>
+<body data-theme="auto">
+  <div class="container">
+    <header>
+      <h1>The Breath Reset: Ancient Healing Breathing Techniques For Modern Chronic Illness</h1>
+      <p class="value-prop">Are you tired of quick fixes that don't last? What if the key to healing has been within you all along—literally in every breath you take? This practical guide bridges ancient breathing wisdom with modern science to help you regain control of your body and mind.</p>
+      <div class="incentive">Natural Healing Starts Here</div>
+    </header>
+
+    <ul>
+      <li><strong>Proven Breathwork Protocols</strong> – Techniques practiced for centuries to calm the nervous system, reduce inflammation, and restore balance.</li>
+      <li><strong>Step-by-Step Guides</strong> – Easy-to-follow instructions so you can practice anywhere, anytime—whether you have 5 minutes or 50.</li>
+      <li><strong>The Science of Breath</strong> – Learn how your breath impacts immunity, stress hormones, digestion, and overall health.</li>
+      <li><strong>Healing for Modern Times</strong> – Adapt ancient practices to address today's struggles with anxiety, burnout, and chronic illness.</li>
+    </ul>
+
+    <div class="who-for">
+      <h3>Who this is for:</h3>
+      <p>People living with chronic pain, fatigue, or stress. Anyone seeking natural, drug-free ways to support their healing. Beginners who want simple, practical breathwork routines. Wellness seekers who want to upgrade their health toolkit.</p>
+      <div class="conditions">Individuals that suffer with: Anxiety, Depression, Insomnia, ADHD / focus issues, PTSD / trauma, Chronic stress, Migraines, Fibromyalgia, Hard Flaccid, Pelvic Floor Dysfunction, Muscle Contraction</div>
+    </div>
+
+    <a id="cta-link" class="cta-button" href="https://healthyhelping.gumroad.com/l/TheBreathReset?utm_source=micropage&utm_medium=redirect&utm_campaign=breathreset" target="_blank" rel="noopener noreferrer">Get The Breath Reset Ebook</a>
+
+    <div class="email-form" id="email-section">
+      <form id="email-form">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <button type="submit">Send Me Breathing Tips</button>
+      </form>
+      <div class="success-message" id="success">Thanks! Check your inbox for breathing tips.</div>
+    </div>
+
+    <footer>
+      <p>MicroPage • Simple > Complex<br>Not affiliated with Gumroad or Healthy Helping.</p>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('email-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      document.getElementById('success').style.display = 'block';
+      this.reset();
+    });
+    
+    // Add subtle scroll animation for elements
+    document.addEventListener('DOMContentLoaded', function() {
+      const elements = document.querySelectorAll('li, .who-for, .email-form');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.animation = 'fadeIn 0.6s ease forwards';
+            entry.target.style.opacity = '0';
+            entry.target.style.transform = 'translateY(20px)';
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      elements.forEach(el => {
+        observer.observe(el);
+      });
+    });
+  </script>
+</body>
+</html>
