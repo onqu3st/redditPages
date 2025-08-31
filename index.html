@@ -218,7 +218,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const GITHUB_REPO = 'onqu3st/redditPages';
-            const PAGES_DIR_API = `https://api.github.com/repos/${GITHUB_REPO}/contents/pages`;
+            const PAGES_DIR_API = `https://api.github.com/repos/${GITHUB_REPO}/contents/html`;
 
             const grid = document.getElementById('pages-grid');
             const syncButton = document.getElementById('sync-button');
@@ -288,7 +288,7 @@
                     init3dCards();
                     pagesLoaded = true;
                 } else {
-                    grid.innerHTML = '<p class="text-muted text-center md:col-span-2 lg:col-span-3">No HTML pages found in the /pages directory.</p>';
+                    grid.innerHTML = '<p class="text-muted text-center md:col-span-2 lg:col-span-3">No HTML pages found in the /html directory.</p>';
                     pagesLoaded = false;
                 }
             }
