@@ -1,202 +1,380 @@
 <!DOCTYPE html>
-<html lang="en" class="theme-light">
+<html lang="en" class="theme-reddit">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reddit Hustle Project v1.1</title>
+  <title>Reddit Hustle Project v2.0</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&family=Ubuntu+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <style type="text/tailwindcss">
-    @layer base {
-      :root {
-        /* Light Theme */
-        --bg-primary: 248 250 252;
-        --accent-primary: 220 38 38;
-        --accent-secondary: 248 113 113;
-        --text-primary: 15 23 42;
-        --text-secondary: 100 116 139;
-        --blob-color-1: 254 202 202;
-        --blob-color-2: 254 242 242;
-
-        /* Dark Theme */
-        &.theme-dark {
-          --bg-primary: 15 23 42;
-          --accent-primary: 248 113 113;
-          --accent-secondary: 254 202 202;
-          --text-primary: 241 245 249;
-          --text-secondary: 203 213 225;
-          --blob-color-1: 55 48 63;
-          --blob-color-2: 39 37 47;
-        }
-
-        /* Matrix Theme */
-        &.theme-matrix {
-          --bg-primary: 0 10 0;
-          --accent-primary: 0 255 100;
-          --accent-secondary: 0 200 80;
-          --text-primary: 0 255 100;
-          --text-secondary: 0 180 70;
-          --blob-color-1: 0 40 20;
-          --blob-color-2: 0 25 10;
-        }
-
-        /* Reddit Theme */
-        &.theme-reddit {
-          --bg-primary: 246 247 248;
-          --accent-primary: 255 69 0;
-          --accent-secondary: 255 120 50;
-          --text-primary: 26 26 27;
-          --text-secondary: 120 124 126;
-          --blob-color-1: 255 200 180;
-          --blob-color-2: 255 230 220;
-        }
-      }
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    body { 
+      font-family: 'Rubik', sans-serif; 
+      transition: background 0.5s ease, color 0.5s ease; 
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    
+    .highlight { 
+      font-weight: 600; 
+      position: relative;
+    }
+    
+    .highlight::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 3px;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.3s ease;
+    }
+    
+    .highlight:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+    
+    .sync-button { 
+      background: var(--accent); 
+      color: #fff; 
+      padding: 0.75rem 1.5rem; 
+      border-radius: 9999px;
+      transition: transform .2s ease, background .3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      border: none;
+      font-weight: 600;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .sync-button:hover { 
+      transform: scale(1.05); 
+      background: var(--accent-hover); 
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    }
+    
+    .sync-button:active {
+      transform: scale(0.98);
+    }
+    
+    .sync-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: 0.5s;
+    }
+    
+    .sync-button:hover::before {
+      left: 100%;
     }
 
-    @layer components {
-      /* Animated background gradient */
-      body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
-        background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
-        background-size: 400% 400%;
-        animation: gradientShift 20s ease infinite;
-        z-index: -20;
+    /* Floating blobs animation */
+    .background-blobs div {
+      position: absolute; 
+      border-radius: 50%; 
+      opacity: 0.3;
+      animation: float 12s ease-in-out infinite;
+      filter: blur(60px);
+    }
+    
+    .blob1 { 
+      width: 400px; 
+      height: 400px; 
+      background: var(--blob1); 
+      top: -100px; 
+      left: -100px; 
+    }
+    
+    .blob2 { 
+      width: 300px; 
+      height: 300px; 
+      background: var(--blob2); 
+      bottom: -120px; 
+      right: -80px; 
+      animation-delay: -6s; 
+    }
+    
+    @keyframes float { 
+      0%,100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-40px) scale(1.05); }
+    }
+    
+    /* Glassmorphism cards */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    }
+    
+    .glass-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+      border: 1px solid var(--accent);
+    }
+    
+    /* Theme variables */
+    :root.theme-reddit { 
+      --accent: #ff4500; 
+      --accent-hover: #e03c00; 
+      --blob1: #ff7043; 
+      --blob2: #ffab91; 
+      background: #fff7f2; 
+      color: #222; 
+    }
+    
+    :root.theme-matrix { 
+      --accent: #00ff90; 
+      --accent-hover: #00cc70; 
+      --blob1: #003300; 
+      --blob2: #004d00; 
+      background: #000; 
+      color: #00ff90; 
+    }
+    
+    :root.theme-light { 
+      --accent: #3b82f6; 
+      --accent-hover: #2563eb; 
+      --blob1: #93c5fd; 
+      --blob2: #bfdbfe; 
+      background: #f9fafb; 
+      color: #111; 
+    }
+    
+    :root.theme-dark { 
+      --accent: #f59e0b; 
+      --accent-hover: #d97706; 
+      --blob1: #4b5563; 
+      --blob2: #1f2937; 
+      background: #111827; 
+      color: #f3f4f6; 
+    }
+    
+    #theme-fab-container { 
+      position: fixed; 
+      bottom: 1.5rem; 
+      right: 1.5rem; 
+      z-index: 100;
+    }
+    
+    #theme-fab-toggle { 
+      width: 3.5rem; 
+      height: 3.5rem; 
+      border-radius: 50%; 
+      background: var(--accent); 
+      color: white; 
+      display: flex; 
+      justify-content: center; 
+      align-items: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      transition: transform .2s ease, background 0.3s ease;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    
+    #theme-fab-toggle:hover { 
+      transform: rotate(20deg) scale(1.05); 
+      background: var(--accent-hover);
+    }
+    
+    /* Loader animation */
+    .loader-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    
+    .loader {
+      width: 50px;
+      height: 50px;
+      border: 5px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: var(--accent);
+      animation: spin 1s linear infinite;
+      margin-bottom: 1rem;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    /* Content wrapper with glass effect */
+    .content-wrapper {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      margin: 2rem auto;
+      padding: 2rem;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .content-wrapper {
+        margin: 1rem;
+        padding: 1rem;
       }
-      @keyframes gradientShift {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-      }
-
-      /* Blobs now pulse */
-      .blob1, .blob2 {
-        @apply absolute rounded-full opacity-40 blur-3xl;
-        animation: pulseBlob 8s ease-in-out infinite alternate;
-      }
-      @keyframes pulseBlob {
-        from { transform: scale(1); opacity: 0.4; }
-        to { transform: scale(1.2); opacity: 0.6; }
-      }
-
-      /* Futuristic loader */
-      .loader-svg circle {
-        stroke: rgba(var(--accent-primary), 0.4);
-      }
-      .loader-svg path {
-        stroke: rgb(var(--accent-primary));
-        filter: drop-shadow(0 0 8px rgb(var(--accent-primary)));
-      }
-      .loader-svg {
-        animation: spin 2s linear infinite, pulseStroke 1.5s ease-in-out infinite alternate;
-      }
-      @keyframes pulseStroke {
-        from { stroke-width: 2; }
-        to { stroke-width: 3.5; }
-      }
-      @keyframes spin { 100% { transform: rotate(360deg); } }
-
-      /* Smooth theme transitions */
-      body, .page-card, .sync-button, .highlight, .highlight-text {
-        transition: background 0.6s ease, color 0.6s ease, box-shadow 0.6s ease;
-      }
-
-      /* Floating Particles */
-      .particle {
-        position: absolute;
-        border-radius: 50%;
-        background: rgba(var(--accent-primary), 0.5);
-        box-shadow: 0 0 10px rgba(var(--accent-primary), 0.8);
-        animation: floatUp 15s linear infinite;
-      }
-      @keyframes floatUp {
-        0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
-        30% { opacity: 1; }
-        100% { transform: translateY(-20vh) scale(1.2); opacity: 0; }
+      
+      h1 {
+        font-size: 2.5rem !important;
       }
     }
   </style>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Ubuntu', 'sans-serif'],
-            mono: ['Ubuntu Mono', 'monospace'],
-          },
-        }
-      }
-    }
-  </script>
 </head>
-<body class="antialiased font-sans text-[rgb(var(--text-primary))]">
+<body class="antialiased">
   <div class="background-blobs">
-    <div class="blob1 w-[600px] h-[600px] top-[-200px] left-[-200px]" style="background: rgb(var(--blob-color-1))"></div>
-    <div class="blob2 w-[500px] h-[500px] bottom-[-150px] right-[-150px]" style="background: rgb(var(--blob-color-2))"></div>
+    <div class="blob1"></div>
+    <div class="blob2"></div>
   </div>
-  <div id="particles-js" class="fixed inset-0 -z-10"></div>
-  
-  <div id="particles-container"></div>
+  <div id="particles-js"></div>
 
-  <div class="content-wrapper container mx-auto p-4 md:p-8 max-w-6xl">
-    <header class="text-center mb-12 pt-12">
-      <h1 class="text-5xl md:text-6xl font-bold highlight drop-shadow-lg">Reddit Hustle Project</h1>
-      <p class="text-lg mt-3 text-muted">An automated index of guides, tools, and notes.</p>
+  <div class="content-wrapper container mx-auto p-4 md:p-8 max-w-6xl relative z-10">
+    <header class="text-center mb-12 pt-8 sm:pt-16">
+      <h1 class="text-4xl md:text-6xl font-bold highlight">Reddit Hustle Project</h1>
+      <p class="text-lg mt-2 opacity-80">Bubbly Matrix-flavored automation dashboard 🚀</p>
       <div class="mt-8">
-        <button id="sync-button" class="sync-button font-bold text-lg px-6 py-3 rounded-full">Sync Sheets</button>
+        <button id="sync-button" class="sync-button font-bold text-lg">
+          Sync Sheets
+        </button>
       </div>
     </header>
 
     <main id="pages-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <div id="initial-prompt" class="text-center text-muted md:col-span-2 lg:col-span-3 py-10">
-        <p>Click the <span class="highlight">Sync Sheets</span> button to load content from the repository.</p>
+      <div id="initial-prompt" class="text-center opacity-70 md:col-span-2 lg:col-span-3 py-10 glass-card">
+        <p>Click <span class="highlight">Sync Sheets</span> to explore pages from the repo.</p>
       </div>
     </main>
 
-    <footer class="text-center mt-12 py-8 text-sm text-muted">
-      <p>&copy; 2025 Blayze_Quest | AI Automation </p>
+    <footer class="text-center mt-12 py-8 text-sm opacity-70">
+      <p>&copy; 2025 Blayze_Quest | AI Automation</p>
     </footer>
   </div>
 
-  <!-- Theme Switcher FAB -->
-  <div id="theme-fab-container" class="fixed bottom-6 right-6">
-    <button id="theme-fab-toggle" class="p-4 rounded-full bg-[rgb(var(--accent-primary))] shadow-lg text-[rgb(var(--bg-primary))] transition-transform hover:scale-110 hover:shadow-xl">
-      <svg id="theme-fab-icon" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-      </svg>
+  <!-- Floating Theme Switcher -->
+  <div id="theme-fab-container">
+    <button id="theme-fab-toggle" title="Switch Theme">
+      🌀
     </button>
   </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      /* Particle generator */
-      const container = document.getElementById("particles-container");
-      for (let i = 0; i < 40; i++) {
-        let p = document.createElement("div");
-        p.className = "particle";
-        let size = Math.random() * 6 + 3;
-        p.style.width = size + "px";
-        p.style.height = size + "px";
-        p.style.left = Math.random() * 100 + "vw";
-        p.style.animationDuration = (10 + Math.random() * 10) + "s";
-        p.style.animationDelay = (Math.random() * 5) + "s";
-        container.appendChild(p);
+      /* THEMES */
+      const themes = ['theme-reddit','theme-matrix','theme-light','theme-dark'];
+      const themeParticles = {
+        'theme-reddit': { particleColor:'#ff4500', lineColor:'#ff7043' },
+        'theme-matrix': { particleColor:'#00ff90', lineColor:'#003300' },
+        'theme-light': { particleColor:'#3b82f6', lineColor:'#93c5fd' },
+        'theme-dark': { particleColor:'#f59e0b', lineColor:'#4b5563' }
+      };
+      let currentThemeIndex = 0;
+
+      function loadParticles(theme) {
+        if (window.pJSDom?.length) {
+          window.pJSDom[0].pJS.fn.vendors.destroypJS();
+          window.pJSDom = [];
+        }
+        particlesJS('particles-js', {
+          particles: {
+            number: { value: 40, density:{ enable:true, value_area:800 } },
+            color: { value: themeParticles[theme].particleColor },
+            shape: { type: "circle" },
+            opacity: { value: 0.6 },
+            size: { value: 3, random:true },
+            line_linked: { enable:true, distance:130, color:themeParticles[theme].lineColor, opacity:0.5, width:1 },
+            move: { enable:true, speed:1.2, out_mode:"out" }
+          },
+          interactivity: { detect_on:"canvas", events:{ onhover:{ enable:true, mode:"grab" } } },
+          retina_detect: true
+        });
       }
 
-      /* Theme Switching */
-      const themes = ['theme-light', 'theme-dark', 'theme-matrix', 'theme-reddit'];
-      let idx = themes.indexOf(localStorage.getItem('onqu3st-theme')) || 0;
       function setTheme(theme) {
         document.documentElement.className = theme;
-        localStorage.setItem('onqu3st-theme', theme);
+        localStorage.setItem('redditHustleTheme', theme);
+        currentThemeIndex = themes.indexOf(theme);
+        loadParticles(theme);
       }
-      setTheme(themes[idx]);
-      document.getElementById('theme-fab-toggle').onclick = () => {
-        idx = (idx + 1) % themes.length;
-        setTheme(themes[idx]);
-      };
+
+      document.getElementById('theme-fab-toggle').addEventListener('click', () => {
+        currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+        setTheme(themes[currentThemeIndex]);
+      });
+
+      const savedTheme = localStorage.getItem('redditHustleTheme') || 'theme-reddit';
+      setTheme(savedTheme);
+      
+      // Simulate page loading for demo
+      const syncButton = document.getElementById('sync-button');
+      const grid = document.getElementById('pages-grid');
+      
+      syncButton.addEventListener('click', () => {
+        syncButton.disabled = true;
+        syncButton.textContent = 'Syncing...';
+        
+        grid.innerHTML = `
+          <div class="loader-container glass-card">
+            <div class="loader"></div>
+            <p class="highlight">Syncing with Repository...</p>
+          </div>
+        `;
+        
+        // Simulate loading delay
+        setTimeout(() => {
+          grid.innerHTML = `
+            <div class="glass-card">
+              <div class="p-6">
+                <h3 class="text-xl font-bold highlight mb-2">Reddit Growth Guide</h3>
+                <p class="opacity-80 mb-4">Complete strategy for growing your subreddit</p>
+                <div class="flex justify-between items-center">
+                  <span class="text-sm opacity-70">Last updated: 2 days ago</span>
+                  <span class="highlight text-sm">View Guide →</span>
+                </div>
+              </div>
+            </div>
+            <div class="glass-card">
+              <div class="p-6">
+                <h3 class="text-xl font-bold highlight mb-2">Automation Scripts</h3>
+                <p class="opacity-80 mb-4">Collection of useful automation tools</p>
+                <div class="flex justify-between items-center">
+                  <span class="text-sm opacity-70">Last updated: 1 week ago</span>
+                  <span class="highlight text-sm">View Scripts →</span>
+                </div>
+              </div>
+            </div>
+            <div class="glass-card">
+              <div class="p-6">
+                <h3 class="text-xl font-bold highlight mb-2">Content Calendar</h3>
+                <p class="opacity-80 mb-4">Monthly content planning template</p>
+                <div class="flex justify-between items-center">
+                  <span class="text-sm opacity-70">Last updated: 3 days ago</span>
+                  <span class="highlight text-sm">View Calendar →</span>
+                </div>
+              </div>
+            </div>
+          `;
+          syncButton.disabled = false;
+          syncButton.textContent = 'Sync Sheets';
+        }, 2000);
+      });
     });
   </script>
 </body>
