@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Passive Income Ideas Reddit Discussion Summary</title>
+  <style>
+    :root{
+      --card-bg:#1a1a1a; --card-border:#333; --text-primary:#fff; --text-secondary:#b3b3b3;
+      --accent:#8a6cff; --accent-hover:#6a4dff; --success:#4caf50; --warning:#ff9800; --danger:#f44336;
+      --modal-bg:rgba(10,10,10,.92); --shadow:0 10px 30px rgba(0,0,0,.5); --radius:16px;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Open Sans','Helvetica Neue',sans-serif;
+      background:linear-gradient(135deg,#0f0f0f,#1a1a2e); color:var(--text-primary);
+      min-height:100vh; display:flex; justify-content:center; align-items:center; padding:20px; perspective:1000px;
+    }
+    .card-container{width:100%;max-width:400px;perspective:1000px}
+    .card{
+      background:var(--card-bg); border:1px solid var(--card-border); border-radius:var(--radius); box-shadow:var(--shadow);
+      width:100%; overflow:hidden; cursor:pointer; transition:transform .1s ease, box-shadow .3s ease;
+      transform-style:preserve-3d; position:relative; outline:none;
+    }
+    .media{
+      height:200px; background:conic-gradient(from 45deg,#8a6cff,#ff6b6b,#4ecdc4,#8a6cff);
+      display:flex; justify-content:center; align-items:center; position:relative;
+    }
+    .media::before{content:''; position:absolute; inset:0; background:radial-gradient(circle at center,transparent 40%,var(--card-bg) 90%)}
+    .media span{font-size:24px;font-weight:700;color:#fff;text-shadow:0 2px 4px rgba(0,0,0,.5);z-index:1}
+    .content{padding:24px}
+    .title{
+      font-size:24px;font-weight:800;margin-bottom:12px;
+      background:linear-gradient(90deg,#8a6cff,#ff6b6b); -webkit-background-clip:text; background-clip:text; color:transparent;
+      animation:glow 2s ease-in-out infinite alternate;
+    }
+    @keyframes glow{
+      from{ text-shadow:0 0 5px #fff,0 0 10px #8a6cff,0 0 15px #8a6cff; }
+      to{   text-shadow:0 0 10px #fff,0 0 20px #8a6cff,0 0 30px #8a6cff; }
+    }
+    .desc{color:var(--text-secondary);font-size:16px;line-height:1.5;margin-bottom:20px}
+    .stats{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+    .stat{display:flex;flex-direction:column}
+    .stat-label{font-size:14px;color:var(--text-secondary);margin-bottom:8px}
+    .stat-bar{height:8px;background:#333;border-radius:4px;overflow:hidden}
+    .stat-fill{
+      height:100%; border-radius:4px; width:calc(var(--score) * 10%);
+      transition:width 900ms ease-in-out; background:linear-gradient(90deg,#8a6cff,#ff6b6b);
+    }
+    .footer{display:flex;justify-content:space-between;align-items:center}
+    .badge{background:var(--accent);color:#fff;padding:6px 12px;border-radius:20px;font-size:12px;font-weight:600}
+
+    /* ===== Modal v1.02 (new layout) ===== */
+    .modal{
+      position:fixed; inset:0; background:var(--modal-bg); backdrop-filter:blur(10px);
+      display:none; justify-content:center; align-items:center; z-index:1000; padding:20px;
+    }
+    .modal[open]{display:flex}
+    .modal-content{
+      background:var(--card-bg); border:1px solid var(--card-border); border-radius:var(--radius); box-shadow:var(--shadow);
+      max-width:600px; width:100%; max-height:90vh; overflow-y:auto; position:relative; padding:24px;
+    }
+    .modal-title{
+      font-size:22px; font-weight:800; margin-bottom:8px; color:var(--accent);
+      text-shadow:0 0 8px rgba(138,108,255,.35);
+    }
+    .modal-desc{color:var(--text-secondary);font-size:15px;line-height:1.6;margin-bottom:18px}
+    .section{margin-bottom:22px}
+    .section-title{
+      font-size:18px; font-weight:700; color:var(--text-primary); margin-bottom:10px;
+      border-bottom:1px solid var(--card-border); padding-bottom:6px;
+    }
+    .steps{list-style:none; padding-left:10px}
+    .steps li{margin-bottom:8px; line-height:1.55; color:var(--text-secondary)}
+    .steps li strong{color:var(--text-primary)}
+    .steps li::before{content:"•"; color:var(--accent); font-weight:700; margin-right:8px}
+    .src{margin-top:12px}
+    .src a{color:var(--accent-hover); text-decoration:none}
+    .src a:hover{text-decoration:underline}
+    .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+    .chip{
+      background:#2a2a2a; color:var(--text-secondary); padding:6px 10px; border-radius:12px; font-size:12px; border:1px solid var(--card-border);
+    }
+    .close{
+      position:absolute; top:12px; right:12px; background:none; border:1px solid transparent; color:var(--text-secondary);
+      font-size:22px; cursor:pointer; width:40px; height:40px; border-radius:50%; display:flex; justify-content:center; align-items:center;
+    }
+    .close:hover{background:rgba(255,255,255,.08); color:var(--text-primary)}
+    @media (max-width:600px){ .stats{grid-template-columns:1fr} .modal-content{max-height:100vh} }
+    @media (prefers-reduced-motion:reduce){ *{animation:none !important;transition:none !important} }
+  </style>
+</head>
+<body>
+  <div class="card-container" id="card-container">
+    <div class="card" id="summary-card" role="button" tabindex="0" aria-haspopup="dialog" aria-controls="hc-modal">
+      <div class="media"><span>r/passive_income</span></div>
+      <div class="content">
+        <h2 class="title">Passive Income Discussion</h2>
+        <p class="desc">A diverse set of user-submitted ideas and strategies for generating passive income with varied success rates.</p>
+
+        <div class="stats">
+          <div class="stat">
+            <div class="stat-label">Startup Cost</div>
+            <div class="stat-bar"><div class="stat-fill" style="--score: 4;"></div></div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Earning Potential</div>
+            <div class="stat-bar"><div class="stat-fill" style="--score: 6;"></div></div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Risk Level</div>
+            <div class="stat-bar"><div class="stat-fill" style="--score: 5;"></div></div>
+          </div>
+          <div class="stat">
+            <div class="stat-label">Difficulty</div>
+            <div class="stat-bar"><div class="stat-fill" style="--score: 7;"></div></div>
+          </div>
+        </div>
+
+        <div class="footer"><div class="badge">Summary</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="hc-modal" role="dialog" aria-modal="true" aria-labelledby="hc-modal-title" aria-describedby="hc-modal-desc">
+    <div class="modal-content">
+      <button class="close" id="close-modal" aria-label="Close dialog">&times;</button>
+
+      <h2 class="modal-title" id="hc-modal-title">Passive Income Ideas</h2>
+      <p class="modal-desc" id="hc-modal-desc">
+        Based on discussion from
+        <a href="https://www.reddit.com/r/passive_income/comments/1n54f5j/passive_income/" target="_blank" rel="noopener noreferrer">this Reddit thread</a>
+      </p>
+
+      <div class="section">
+        <h3 class="section-title">Key Ideas from the Discussion</h3>
+        <ul class="steps">
+          <li><strong>Dividend investing:</strong> Focused on ETFs and blue-chip stocks for steady returns.</li>
+          <li><strong>Real estate crowdfunding:</strong> Platforms like Fundrise were mentioned for accessible property investment.</li>
+          <li><strong>Digital products:</strong> Users noted success selling templates, courses, and plugins online.</li>
+          <li><strong>Index fund automation:</strong> Suggested as a "set it and forget it" method with moderate yields.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3 class="section-title">Important Considerations</h3>
+        <ul class="steps">
+          <li><strong>Time to return:</strong> Most methods require 1–3 years to mature into meaningful passive income.</li>
+          <li><strong>Initial capital needed:</strong> Many ideas require an upfront investment ranging from hundreds to thousands.</li>
+          <li><strong>Diversification:</strong> Experts advise mixing methods rather than relying on one income stream.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3 class="section-title">Warnings from the Community</h3>
+        <ul class="steps">
+          <li><strong>"Get rich quick" schemes:</strong> Avoid anything promising large returns with minimal effort; these are often scams.</li>
+          <li><strong>Regulatory risks:</strong> Some platforms (e.g., P2P lending) carry legislative and platform risks.</li>
+          <li><strong>Lack of guaranteed returns:</strong> Dividends and rentals can be affected by market conditions and vacancies.</li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h3 class="section-title">Source</h3>
+        <div class="src">
+          <a href="https://www.reddit.com/r/passive_income/comments/1n54f5j/passive_income/" target="_blank" rel="noopener noreferrer">https://www.reddit.com/r/passive_income/comments/1n54f5j/passive_income/</a>
+        </div>
+      </div>
+
+      <div class="section">
+        <h3 class="section-title">Meta</h3>
+        <div class="meta">
+          <div class="chip">platform: Reddit</div>
+          <div class="chip">subreddit: r/passive_income</div>
+          <div class="chip">category: Investment, Side Hustle</div>
+          <div class="chip">tools: ETFs, Fundrise, Gumroad</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 3D tilt effect
+    const card = document.getElementById('summary-card');
+    const cardContainer = document.getElementById('card-container');
+    const modal = document.getElementById('hc-modal');
+    const closeBtn = document.getElementById('close-modal');
+
+    cardContainer.addEventListener('mousemove', (e) => {
+      const r = cardContainer.getBoundingClientRect();
+      const cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+      const mx = e.clientX - cx, my = e.clientY - cy;
+      const ry = (mx / r.width) * 20, rx = -(my / r.height) * 20;
+      card.style.transform = `rotateY(${ry}deg) rotateX(${rx}deg) scale(1.05)`;
+      card.style.boxShadow = `${-ry*2}px ${rx*2}px 30px rgba(138,108,255,.3), 0 10px 30px rgba(0,0,0,.5)`;
+    });
+    cardContainer.addEventListener('mouseleave', () => {
+      card.style.transform = 'rotateY(0deg) rotateX(0deg) scale(1)';
+      card.style.boxShadow = '0 10px 30px rgba(0,0,0,.5)';
+    });
+
+    function openModal(){
+      modal.setAttribute('open','');
+      document.body.style.overflow='hidden';
+      lastFocus = document.activeElement;
+      closeBtn.focus();
+    }
+    function closeModal(){
+      modal.removeAttribute('open');
+      document.body.style.overflow='auto';
+      if(lastFocus) lastFocus.focus();
+    }
+
+    card.addEventListener('click', openModal);
+    card.addEventListener('keydown', (e)=>{ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); openModal(); }});
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && modal.hasAttribute('open')) closeModal(); });
+
+    // Focus trap
+    let lastFocus=null;
+    document.addEventListener('keydown',(e)=>{
+      if(e.key!=='Tab' || !modal.hasAttribute('open')) return;
+      const f = Array.from(modal.querySelectorAll('button,[href],input,select,textarea,[tabindex]:not([tabindex="-1"])'))
+        .filter(el=>!el.hasAttribute('disabled'));
+      if(!f.length) return;
+      const first=f[0], last=f[f.length-1];
+      if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+      else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+    });
+  </script>
+</body>
+</html>
