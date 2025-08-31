@@ -12,12 +12,12 @@
           colors: {
             'reddit-orange': '#FF4500',
             'reddit-orange-dark': '#cc3700',
-            'hustle-accent': '#4dccf3', // Light blue
-            'hustle-accent-dark': '#3aa8c7',
-            'dark-bg': '#121212',
-            'card-bg': '#1a2a3a',
-            'text-muted': '#a0c8e0',
-            'growth-green': '#10b981',
+            'hustle-accent': '#8a6cff', // Updated to match new design
+            'hustle-accent-dark': '#6a4dff',
+            'dark-bg': '#0f0f0f',
+            'card-bg': '#1a1a1a',
+            'text-muted': '#b3b3b3',
+            'growth-green': '#4caf50',
           }
         }
       }
@@ -26,19 +26,22 @@
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&family=Ubuntu+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-dark: #121212;
-      --card-bg: #1a2a3a;
-      --text-primary: #e0f7ff;
-      --text-muted: #a0c8e0;
-      --highlight-primary: #4dccf3;
-      --highlight-secondary: #ff4500;
-      --border-color: #2a4a6a;
-      --card-glow-color: #4dccf340;
-      --text-glow-color: #4dccf3;
+      --bg-dark: #0f0f0f;
+      --card-bg: #1a1a1a;
+      --card-border: #333;
+      --text-primary: #fff;
+      --text-secondary: #b3b3b3;
+      --highlight-primary: #8a6cff;
+      --highlight-secondary: #ff6b6b;
+      --border-color: #333;
+      --card-glow-color: rgba(138, 108, 255, 0.3);
+      --text-glow-color: rgba(138, 108, 255, 0.5);
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      --radius: 16px;
     }
 
     body {
-      background-color: var(--bg-dark);
+      background: linear-gradient(135deg, #0f0f0f, #1a1a2e);
       color: var(--text-primary);
       font-family: 'Ubuntu', sans-serif;
       margin: 0;
@@ -53,118 +56,67 @@
     body::after {
       content: "";
       position: fixed;
-      top: -50%;  /* Extend to cover potential movement */
+      top: -50%;
       left: -50%;
-      width: 200%; /* Extend to cover potential movement */
+      width: 200%;
       height: 200%;
-      z-index: 0; /* Behind content */
+      z-index: 0;
     }
 
-    /* Base layer with subtle gradient */
     body::before {
       background: radial-gradient(ellipse at center, rgba(44, 83, 100, 0.15) 0%, rgba(18, 32, 39, 0) 70%);
-      /* No animation on base layer for stability */
     }
 
-    /* Animated wavy layers for glass effect */
     body::after {
-      /* Layered gradients for wavy highlights/shadows */
       background:
-        radial-gradient(ellipse at 30% 40%, rgba(77, 204, 243, 0.1) 0%, transparent 25%),
-        radial-gradient(ellipse at 70% 60%, rgba(255, 69, 0, 0.08) 0%, transparent 25%),
-        radial-gradient(ellipse at 50% 30%, rgba(77, 204, 243, 0.07) 0%, transparent 30%),
-        radial-gradient(ellipse at 20% 80%, rgba(255, 69, 0, 0.05) 0%, transparent 30%);
-
-      /* Animate position and scale for wavy, fluid motion */
+        radial-gradient(ellipse at 30% 40%, rgba(138, 108, 255, 0.1) 0%, transparent 25%),
+        radial-gradient(ellipse at 70% 60%, rgba(255, 107, 107, 0.08) 0%, transparent 25%),
+        radial-gradient(ellipse at 50% 30%, rgba(138, 108, 255, 0.07) 0%, transparent 30%),
+        radial-gradient(ellipse at 20% 80%, rgba(255, 107, 107, 0.05) 0%, transparent 30%);
       animation: wavyFlow 25s ease-in-out infinite alternate;
-      /* Apply blur for the frosted glass look */
-      filter: blur(40px); /* Increased blur for softer effect */
+      filter: blur(40px);
       -webkit-filter: blur(40px);
-      opacity: 0.7; /* Adjust overall opacity of the effect */
+      opacity: 0.7;
     }
 
-    /* Keyframes for wavy, fluid movement */
     @keyframes wavyFlow {
       0%, 100% {
-        transform:
-          translate(0, 0)
-          scale(1);
-        /* Slightly adjust background positions for subtle shift */
-        background-position:
-          30% 40%,
-          70% 60%,
-          50% 30%,
-          20% 80%;
-        background-size:
-          60% 60%,
-          50% 50%,
-          70% 70%,
-          65% 65%;
+        transform: translate(0, 0) scale(1);
+        background-position: 30% 40%, 70% 60%, 50% 30%, 20% 80%;
+        background-size: 60% 60%, 50% 50%, 70% 70%, 65% 65%;
       }
       25% {
-        transform:
-          translate(-1%, 0.5%)
-          scale(1.01);
-        background-position:
-          32% 38%,
-          68% 62%,
-          48% 32%,
-          22% 78%;
-        background-size:
-          62% 58%,
-          48% 52%,
-          68% 72%,
-          63% 67%;
+        transform: translate(-1%, 0.5%) scale(1.01);
+        background-position: 32% 38%, 68% 62%, 48% 32%, 22% 78%;
+        background-size: 62% 58%, 48% 52%, 68% 72%, 63% 67%;
       }
       50% {
-        transform:
-          translate(0.5%, -1%)
-          scale(0.995);
-        background-position:
-          28% 42%,
-          72% 58%,
-          52% 28%,
-          18% 82%;
-        background-size:
-          58% 62%,
-          52% 48%,
-          72% 68%,
-          67% 63%;
+        transform: translate(0.5%, -1%) scale(0.995);
+        background-position: 28% 42%, 72% 58%, 52% 28%, 18% 82%;
+        background-size: 58% 62%, 52% 48%, 72% 68%, 67% 63%;
       }
       75% {
-        transform:
-          translate(-0.5%, 0.8%)
-          scale(1.005);
-        background-position:
-          31% 39%,
-          69% 61%,
-          49% 31%,
-          21% 79%;
-        background-size:
-          61% 59%,
-          49% 51%,
-          69% 71%,
-          64% 66%;
+        transform: translate(-0.5%, 0.8%) scale(1.005);
+        background-position: 31% 39%, 69% 61%, 49% 31%, 21% 79%;
+        background-size: 61% 59%, 49% 51%, 69% 71%, 64% 66%;
       }
     }
     /* --- End Glassmorphism Background --- */
 
-
     .content-wrapper {
       position: relative;
-      z-index: 10; /* Content above background effects */
+      z-index: 10;
       padding: 2rem;
       max-width: 1200px;
       margin: 0 auto;
     }
 
-    /* Typography */
     h1, h2, h3, h4 {
       color: var(--text-primary);
     }
 
     .text-muted {
-      color: var(--text-muted);
+      color: var(--text-secondary);
     }
 
     .highlight {
@@ -172,9 +124,8 @@
       text-shadow: 0 0 8px var(--text-glow-color);
     }
 
-    /* Buttons */
     .sync-button {
-      background-color: var(--highlight-secondary);
+      background: linear-gradient(90deg, var(--highlight-primary), var(--highlight-secondary));
       color: white;
       padding: 12px 24px;
       border-radius: 8px;
@@ -186,9 +137,8 @@
     }
 
     .sync-button:hover {
-      background-color: var(--reddit-orange-dark);
       transform: translateY(-2px);
-      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 6px 12px rgba(138, 108, 255, 0.3);
     }
 
     .sync-button:active {
@@ -196,7 +146,6 @@
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     }
 
-    /* Loader */
     .loader-container {
       display: flex;
       flex-direction: column;
@@ -226,78 +175,108 @@
       stroke-dashoffset: 25;
     }
 
-    /* Cards - Enhanced for Theme and Glow */
+    /* Enhanced 3D Card Styles */
+    .page-card-container {
+      width: 100%;
+      perspective: 1000px;
+    }
+
     .page-card {
-      background-color: var(--card-bg);
-      border-radius: 12px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      width: 100%;
       overflow: hidden;
-      box-shadow: 0 0 15px var(--card-glow-color), 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
-      border: 1px solid var(--border-color);
-      transition: transform 0.2s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      height: 100%;
+      cursor: pointer;
+      transition: transform 0.1s ease, box-shadow 0.3s ease;
       transform-style: preserve-3d;
-      transform: perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1);
+      position: relative;
+      outline: none;
+      display: block;
+      height: 100%;
     }
 
-    .page-card:hover {
-       transform: perspective(1000px) scale3d(1.03, 1.03, 1.03);
-       box-shadow: 0 0 25px var(--card-glow-color), 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
-       border-color: var(--highlight-primary);
-    }
-
-    .page-card img {
-      transition: transform 0.3s ease;
-    }
-
-    .page-card:hover img {
-      transform: scale(1.05);
-    }
-
-    .page-card .p-6 {
-      flex-grow: 1;
+    .page-card .media {
+      height: 200px;
+      background: conic-gradient(from 45deg, var(--highlight-primary), var(--highlight-secondary), #4ecdc4, var(--highlight-primary));
       display: flex;
-      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      position: relative;
     }
 
-    .page-card h3 {
-      margin-bottom: 0.5rem;
-      transition: color 0.2s ease;
-      text-shadow: 0 0 4px rgba(77, 204, 243, 0.3);
+    .page-card .media::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, transparent 40%, var(--card-bg) 90%);
     }
 
-    .page-card:hover h3 {
-      color: var(--highlight-primary);
-      text-shadow: 0 0 8px var(--text-glow-color);
+    .page-card .media span {
+      font-size: 24px;
+      font-weight: 700;
+      color: #fff;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, .5);
+      z-index: 1;
+      text-align: center;
+      padding: 0 1rem;
     }
 
-    .page-card p {
-      margin-bottom: 0.5rem;
-      flex-grow: 1;
+    .page-card .content {
+      padding: 24px;
     }
 
-    .page-card .text-sm {
-      margin-top: auto;
-      color: var(--growth-green);
-      font-weight: bold;
-      transition: color 0.2s ease;
-      text-shadow: 0 0 4px rgba(16, 185, 129, 0.3);
+    .page-card .title {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 12px;
+      background: linear-gradient(90deg, var(--highlight-primary), var(--highlight-secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: glow 2s ease-in-out infinite alternate;
     }
 
-    .page-card:hover .text-sm {
-      color: var(--highlight-primary);
-      text-shadow: 0 0 8px var(--text-glow-color);
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 5px #fff, 0 0 10px var(--highlight-primary), 0 0 15px var(--highlight-primary);
+      }
+      to {
+        text-shadow: 0 0 10px #fff, 0 0 20px var(--highlight-primary), 0 0 30px var(--highlight-primary);
+      }
+    }
+
+    .page-card .desc {
+      color: var(--text-secondary);
+      font-size: 16px;
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .page-card .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .page-card .badge {
+      background: var(--highlight-primary);
+      color: #fff;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
     }
 
     header h1 {
-        background: linear-gradient(to right, var(--highlight-secondary), var(--highlight-primary));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        text-fill-color: transparent;
-        animation: shimmer 3s infinite;
-        text-shadow: 0 0 15px var(--text-glow-color);
+      background: linear-gradient(to right, var(--highlight-secondary), var(--highlight-primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-fill-color: transparent;
+      animation: shimmer 3s infinite;
+      text-shadow: 0 0 15px var(--text-glow-color);
     }
 
     @keyframes shimmer {
@@ -306,23 +285,21 @@
     }
 
     footer {
-        border-top: 1px solid var(--border-color);
-        margin-top: 2rem;
-        padding-top: 1rem;
+      border-top: 1px solid var(--border-color);
+      margin-top: 2rem;
+      padding-top: 1rem;
     }
 
-    /* Grid adjustments */
     #pages-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-        gap: 1.5rem;
-        margin-top: 1rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
     }
 
   </style>
 </head>
 <body class="antialiased">
-  <!-- Main Content -->
   <div class="content-wrapper">
     <header class="text-center mb-8 pt-4">
       <h1 class="text-4xl md:text-5xl font-bold">Reddit Hustle Project</h1>
@@ -347,8 +324,6 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-
-      // --- Script Logic (Simplified) ---
       const GITHUB_REPO = 'onqu3st/redditPages';
       const PAGES_DIR_API = `https://api.github.com/repos/${GITHUB_REPO}/contents/html`;
 
@@ -393,10 +368,7 @@
       async function createPageCard(page) {
         const title = formatTitle(page.name);
         const pageUrl = `https://onqu3st.github.io/redditPages/html/${page.name}`;
-        const bgColor = '1a2a3a';
-        const textColor = '4dccf3';
-        const imageUrl = `https://placehold.co/600x400/${bgColor}/${textColor}?text=${encodeURIComponent(title.split(':')[0] || title)}&font=ubuntu`;
-
+        
         let description = "Loading description...";
         try {
             const response = await fetch(pageUrl);
@@ -413,17 +385,48 @@
         }
 
         return `
-          <a href="${pageUrl}" target="_blank" rel="noopener noreferrer" class="page-card no-underline block h-full">
-            <div class="overflow-hidden rounded-t-lg">
-              <img src="${imageUrl}" alt="Placeholder for ${title}" class="w-full h-48 object-cover transition-transform duration-300">
-            </div>
-            <div class="p-6 flex flex-col flex-grow">
-              <h3 class="text-xl font-bold transition-colors duration-200">${title}</h3>
-              <p class="text-muted mt-2 flex-grow">${description}</p>
-              <p class="text-sm mt-4 font-mono text-right text-growth-green transition-colors duration-200">View Sheet &rarr;</p>
-            </div>
-          </a>
+          <div class="page-card-container">
+            <a href="${pageUrl}" target="_blank" rel="noopener noreferrer" class="page-card no-underline block h-full">
+              <div class="media">
+                <span>${title.split(':')[0] || title}</span>
+              </div>
+              <div class="content">
+                <h3 class="title">${title}</h3>
+                <p class="desc">${description}</p>
+                <div class="footer">
+                  <div class="badge">View Sheet</div>
+                </div>
+              </div>
+            </a>
+          </div>
         `;
+      }
+
+      // Add 3D tilt effect to card containers
+      function add3DEffects() {
+        const cardContainers = document.querySelectorAll('.page-card-container');
+        cardContainers.forEach(container => {
+          const card = container.querySelector('.page-card');
+          
+          container.addEventListener('mousemove', (e) => {
+            const rect = container.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            const mouseX = e.clientX - centerX;
+            const mouseY = e.clientY - centerY;
+            
+            const rotateY = (mouseX / rect.width) * 20;
+            const rotateX = -(mouseY / rect.height) * 20;
+            
+            card.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg) scale(1.05)`;
+            card.style.boxShadow = `${-rotateY*2}px ${rotateX*2}px 30px rgba(138,108,255,.3), 0 10px 30px rgba(0,0,0,.5)`;
+          });
+          
+          container.addEventListener('mouseleave', () => {
+            card.style.transform = 'rotateY(0deg) rotateX(0deg) scale(1)';
+            card.style.boxShadow = '0 10px 30px rgba(0,0,0,.5)';
+          });
+        });
       }
 
       async function renderPages(files) {
@@ -434,6 +437,8 @@
                 const cardHTMLs = await Promise.all(cardPromises);
                 grid.innerHTML = cardHTMLs.join('');
                 pagesLoaded = true;
+                // Add 3D effects after cards are rendered
+                setTimeout(add3DEffects, 100);
             } catch (err) {
                 console.error("Error generating cards:", err);
                 grid.innerHTML = '<p class="text-red-400 text-center py-10 col-span-full">Error loading card content. Please try again.</p>';
