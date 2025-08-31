@@ -35,6 +35,13 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
+            perspective: 1000px;
+        }
+
+        .card-container {
+            width: 100%;
+            max-width: 400px;
+            perspective: 1000px;
         }
 
         .card {
@@ -43,15 +50,11 @@
             border-radius: var(--radius);
             box-shadow: var(--shadow);
             width: 100%;
-            max-width: 400px;
             overflow: hidden;
             cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+            transition: transform 0.1s ease, box-shadow 0.3s ease;
+            transform-style: preserve-3d;
+            position: relative;
         }
 
         .media {
@@ -319,41 +322,43 @@
     </style>
 </head>
 <body>
-    <div class="card" id="summary-card">
-        <div class="media">
-            <span>r/sidehustle</span>
-        </div>
-        <div class="content">
-            <h2 class="title">AI Voice Cloning Side Hustle</h2>
-            <p class="desc">Earning $450/month by creating custom AI voice clones for clients</p>
-            <div class="stats">
-                <div class="stat">
-                    <div class="stat-label">Startup Cost</div>
-                    <div class="stat-bar">
-                        <div class="stat-fill" style="width: 20%; background: #8a6cff;"></div>
-                    </div>
-                </div>
-                <div class="stat">
-                    <div class="stat-label">Difficulty</div>
-                    <div class="stat-bar">
-                        <div class="stat-fill" style="width: 40%; background: #ff6b6b;"></div>
-                    </div>
-                </div>
-                <div class="stat">
-                    <div class="stat-label">Tech Required</div>
-                    <div class="stat-bar">
-                        <div class="stat-fill" style="width: 60%; background: #4ecdc4;"></div>
-                    </div>
-                </div>
-                <div class="stat">
-                    <div class="stat-label">Earning Potential</div>
-                    <div class="stat-bar">
-                        <div class="stat-fill" style="width: 75%; background: #ffd166;"></div>
-                    </div>
-                </div>
+    <div class="card-container" id="card-container">
+        <div class="card" id="summary-card">
+            <div class="media">
+                <span>r/sidehustle</span>
             </div>
-            <div class="footer">
-                <div class="badge">Summary</div>
+            <div class="content">
+                <h2 class="title">AI Voice Cloning Side Hustle</h2>
+                <p class="desc">Earning $450/month by creating custom AI voice clones for clients</p>
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-label">Startup Cost</div>
+                        <div class="stat-bar">
+                            <div class="stat-fill" style="width: 20%; background: #8a6cff;"></div>
+                        </div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">Difficulty</div>
+                        <div class="stat-bar">
+                            <div class="stat-fill" style="width: 40%; background: #ff6b6b;"></div>
+                        </div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">Tech Required</div>
+                        <div class="stat-bar">
+                            <div class="stat-fill" style="width: 60%; background: #4ecdc4;"></div>
+                        </div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-label">Earning Potential</div>
+                        <div class="stat-bar">
+                            <div class="stat-fill" style="width: 75%; background: #ffd166;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer">
+                    <div class="badge">Summary</div>
+                </div>
             </div>
         </div>
     </div>
@@ -453,9 +458,44 @@
 
     <script>
         const card = document.getElementById('summary-card');
+        const cardContainer = document.getElementById('card-container');
         const modal = document.getElementById('modal');
         const closeModal = document.getElementById('close-modal');
         
+        // 3D tilt effect
+        cardContainer.addEventListener('mousemove', (e) => {
+            const cardRect = cardContainer.getBoundingClientRect();
+            const cardCenterX = cardRect.left + cardRect.width / 2;
+            const cardCenterY = cardRect.top + cardRect.height / 2;
+            
+            const mouseX = e.clientX - cardCenterX;
+            const mouseY = e.clientY - cardCenterY;
+            
+            const rotateY = (mouseX / cardRect.width) * 20;
+            const rotateX = -(mouseY / cardRect.height) * 20;
+            
+            const glowX = (mouseX / cardRect.width) * 100;
+            const glowY = (mouseY / cardRect.height) * 100;
+            
+            card.style.transform = `rotateY(${rotateY}deg) rotateX(${rotateX}deg) scale(1.05)`;
+            
+            // Add dynamic glow effect
+            card.style.boxShadow = `
+                ${-rotateY * 2}px ${rotateX * 2}px 30px rgba(138, 108, 255, 0.3),
+                0 10px 30px rgba(0, 0, 0, 0.5)
+            `;
+        });
+        
+        cardContainer.addEventListener('mouseenter', () => {
+            card.style.transition = 'transform 0.1s ease, box-shadow 0.3s ease';
+        });
+        
+        cardContainer.addEventListener('mouseleave', () => {
+            card.style.transform = 'rotateY(0deg) rotateX(0deg) scale(1)';
+            card.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.5)';
+        });
+        
+        // Modal functionality
         card.addEventListener('click', () => {
             modal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
