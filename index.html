@@ -20,9 +20,9 @@
             'hustle-accent-dark': '#00c4cc',
             // Darker background for "gritty" feel
             'dark-bg': '#121212',
-            'card-bg': '#1e1e1e',
-            // Muted text
-            'text-muted': '#a0aec0',
+            'card-bg': '#1a2a3a', // Darker blue-ish base for cards
+            // Muted text (cooler)
+            'text-muted': '#a0c8e0',
             // Success/Growth Green (Hustle Positive Outcome)
             'growth-green': '#10b981',
           }
@@ -33,22 +33,25 @@
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&family=Ubuntu+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style>
-    /* Base styles - keep most of yours, just adjust for new theme */
+    /* Base styles - adjust for new theme */
     :root {
-      --bg-dark: #121212; /* Use new dark color */
-      --card-bg: #1e1e1e; /* Use new card color */
-      --text-primary: #f3f4f6;
-      --text-muted: #a0aec0;
-      --highlight-primary: #00f7ff; /* Use new accent color */
-      --highlight-secondary: #ff4500; /* Use Reddit orange */
-      --border-color: #374151;
+      --bg-dark: #121212;
+      --card-bg: #1a2a3a; /* Darker blue-ish base */
+      --text-primary: #e0f7ff; /* Brighter, cooler text */
+      --text-muted: #a0c8e0; /* Cooler muted text */
+      --highlight-primary: #4dccf3; /* Vibrant light blue */
+      --highlight-secondary: #ff4500; /* Reddit orange */
+      --border-color: #2a4a6a; /* Cooler border */
+      /* --- New Glow Variables --- */
+      --card-glow-color: #4dccf380; /* Light blue glow, semi-transparent */
+      --text-glow-color: #4dccf3;   /* Light blue text glow */
     }
 
     body {
       background-color: var(--bg-dark);
       color: var(--text-primary);
       font-family: 'Ubuntu', sans-serif;
-      overflow-x: hidden; /* Prevent horizontal scrollbar from blobs */
+      overflow-x: hidden;
     }
 
     .content-wrapper {
@@ -71,13 +74,13 @@
       position: absolute;
       border-radius: 50%;
       filter: blur(80px);
-      opacity: 0.3; /* Slightly more opaque */
+      opacity: 0.3;
     }
 
     .blob1 {
       width: 600px;
       height: 600px;
-      background: var(--highlight-primary); /* Hustle accent */
+      background: var(--highlight-primary);
       top: -20%;
       left: -10%;
       animation: float 15s infinite ease-in-out;
@@ -86,7 +89,7 @@
     .blob2 {
       width: 500px;
       height: 500px;
-      background: var(--highlight-secondary); /* Reddit orange */
+      background: var(--highlight-secondary);
       bottom: -20%;
       right: -10%;
       animation: float 12s infinite ease-in-out reverse;
@@ -118,14 +121,16 @@
 
     .highlight {
       color: var(--highlight-primary);
+      /* Add text glow */
+      text-shadow: 0 0 8px var(--text-glow-color);
     }
 
     /* Buttons */
     .sync-button {
-      background-color: var(--highlight-secondary); /* Reddit Orange */
+      background-color: var(--highlight-secondary);
       color: white;
       padding: 12px 24px;
-      border-radius: 8px; /* Slightly rounded */
+      border-radius: 8px;
       border: none;
       font-weight: bold;
       cursor: pointer;
@@ -136,7 +141,7 @@
     }
 
     .sync-button:hover {
-      background-color: var(--reddit-orange-dark); /* Darker on hover */
+      background-color: var(--reddit-orange-dark);
       transform: translateY(-2px);
       box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
     }
@@ -176,25 +181,27 @@
       stroke-dashoffset: 25;
     }
 
-    /* Cards - Enhanced for 3D and Theme */
+    /* Cards - Enhanced for 3D, Theme, and Glow */
     .page-card {
       background-color: var(--card-bg);
-      border-radius: 12px; /* Slightly more rounded */
+      border-radius: 12px;
       overflow: hidden;
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
-      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.3s ease;
+      /* --- Base shadow, border, and glow --- */
+      box-shadow: 0 0 15px var(--card-glow-color), 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
       border: 1px solid var(--border-color);
+      transition: transform 0.2s ease, box-shadow 0.3s ease, border-color 0.3s ease;
       display: flex;
       flex-direction: column;
       height: 100%;
-      transform-style: preserve-3d; /* Enable 3D */
+      transform-style: preserve-3d;
       transform: perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1);
     }
 
     .page-card:hover {
-       transform: perspective(1000px) scale3d(1.03, 1.03, 1.03); /* Pop out on hover */
-       box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
-       border-color: var(--highlight-primary); /* Glow border */
+       transform: perspective(1000px) scale3d(1.03, 1.03, 1.03);
+       /* --- Enhanced glow effect on hover --- */
+       box-shadow: 0 0 25px var(--card-glow-color), 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+       border-color: var(--highlight-primary);
     }
 
     /* Card Image */
@@ -216,10 +223,14 @@
     .page-card h3 {
       margin-bottom: 0.5rem;
       transition: color 0.2s ease;
+      /* Add subtle text glow to title */
+      text-shadow: 0 0 4px rgba(77, 204, 243, 0.3);
     }
 
     .page-card:hover h3 {
-      color: var(--highlight-primary); /* Title glow on hover */
+      color: var(--highlight-primary);
+      /* Enhance text glow on hover */
+      text-shadow: 0 0 8px var(--text-glow-color);
     }
 
     .page-card p {
@@ -228,14 +239,18 @@
     }
 
     .page-card .text-sm {
-      margin-top: auto; /* Push to bottom */
-      color: var(--growth-green); /* Hustle success color */
+      margin-top: auto;
+      color: var(--growth-green);
       font-weight: bold;
       transition: color 0.2s ease;
+      /* Add subtle text glow to link text */
+      text-shadow: 0 0 4px rgba(16, 185, 129, 0.3);
     }
 
     .page-card:hover .text-sm {
-      color: var(--hustle-accent); /* Accent on hover */
+      color: var(--highlight-primary);
+      /* Enhance text glow on hover */
+      text-shadow: 0 0 8px var(--text-glow-color);
     }
 
     /* Header/Footer adjustments */
@@ -246,6 +261,8 @@
         background-clip: text;
         text-fill-color: transparent;
         animation: shimmer 3s infinite;
+        /* Add text glow to main header */
+        text-shadow: 0 0 15px var(--text-glow-color);
     }
 
     @keyframes shimmer {
@@ -257,10 +274,10 @@
         border-top: 1px solid var(--border-color);
     }
 
-    /* Responsive adjustments if needed */
+    /* Responsive adjustments */
     @media (max-width: 768px) {
         .blob1, .blob2 {
-            filter: blur(60px); /* Reduce blur on mobile */
+            filter: blur(60px);
         }
     }
 
@@ -275,11 +292,11 @@
 
   <div class="content-wrapper container mx-auto p-4 md:p-8 max-w-6xl">
     <header class="text-center mb-12 pt-8 sm:pt-16">
-      <h1 class="text-4xl md:text-6xl font-bold">Reddit Hustle Project</h1> <!-- Title tweak -->
-      <p class="text-lg mt-2 text-muted">Automated Guides, Tools & Notes for the Grind.</p> <!-- Description tweak -->
+      <h1 class="text-4xl md:text-6xl font-bold">Reddit Hustle Project</h1>
+      <p class="text-lg mt-2 text-muted">Automated Guides, Tools & Notes for the Grind.</p>
       <div class="mt-8">
         <button id="sync-button" class="sync-button font-bold text-lg">
-          Sync Sheets <!-- Action verb fits hustle -->
+          Sync Sheets
         </button>
       </div>
     </header>
@@ -291,7 +308,7 @@
     </main>
 
     <footer class="text-center mt-12 py-8 text-sm text-muted border-t border-border-color">
-      <p>&copy; 2025 Blayze_Quest | Auto-Generated via GitHub API.</p> <!-- Minor text tweak -->
+      <p>&copy; 2025 Blayze_Quest | Auto-Generated via GitHub API.</p>
     </footer>
   </div>
 
@@ -306,7 +323,7 @@
         particlesJS('particles-js', {
           particles: {
             number: { value: 50, density: { enable: true, value_area: 800 } },
-            color: { value: '#00f7ff' }, // Hustle accent
+            color: { value: '#4dccf3' }, // Light blue
             shape: { type: "circle" },
             opacity: { value: 0.5 },
             size: { value: 3, random: true },
@@ -317,9 +334,9 @@
           retina_detect: true
         });
       }
-      loadParticles(); // Load particles on startup
+      loadParticles();
 
-      // --- Original Script Logic (mostly unchanged) ---
+      // --- Script Logic ---
       const GITHUB_REPO = 'onqu3st/redditPages';
       // Ensure URL is correctly formatted without extra spaces
       const PAGES_DIR_API = `https://api.github.com/repos/${GITHUB_REPO}/contents/html`;
@@ -349,10 +366,9 @@
       }
 
       function createDescription(title) {
-        // Slightly more dynamic description for hustle feel
         const topics = [
           "grind", "strategy", "insight", "tactic", "blueprint", "playbook",
-            "hack", "pro tip", "deep dive", "breakdown"
+          "hack", "pro tip", "deep dive", "breakdown"
         ];
         const randomTopic = topics[Math.floor(Math.random() * topics.length)];
         return `Your ${randomTopic} on "${title}". Click to unlock the knowledge.`;
@@ -361,15 +377,14 @@
       function createPageCard(page) {
         const title = formatTitle(page.name);
         const description = createDescription(title);
+        // Fix URL construction - remove extra spaces
         const pageUrl = `https://onqu3st.github.io/redditPages/html/${page.name}`;
         
-        // Use Tailwind classes for styling, leveraging our custom colors
-        // Image URL generation can stay the same or be updated if needed
-        const bgColor = '1e1e1e'; // Card background from our theme
-        const textColor = '00f7ff'; // Hustle accent from our theme
+        const bgColor = '1a2a3a'; // Card background from our theme
+        const textColor = '4dccf3'; // Light blue accent from our theme
+        // Fix URL construction - remove extra spaces
         const imageUrl = `https://placehold.co/600x400/${bgColor}/${textColor}?text=${encodeURIComponent(title.split(':')[0] || title)}&font=ubuntu`;
 
-        // Use Tailwind utility classes extensively for the new look
         return `
           <a href="${pageUrl}" target="_blank" rel="noopener noreferrer" class="page-card no-underline group block h-full" style="animation-delay: ${Math.random() * 0.5}s">
             <div class="overflow-hidden rounded-t-lg">
@@ -384,7 +399,6 @@
         `;
       }
 
-      // 3D Card Interaction (kept as is, enhanced by CSS)
       function init3dCards() {
         const cards = document.querySelectorAll('.page-card');
         cards.forEach(card => {
@@ -395,11 +409,9 @@
             const maxRotate = 8;
             const rotateX = ((y - height / 2) / (height / 2) * -maxRotate).toFixed(2);
             const rotateY = ((x - width / 2) / (width / 2) * maxRotate).toFixed(2);
-            // Apply the 3D transform
             card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03,1.03,1.03)`;
           });
           card.addEventListener('mouseleave', () => {
-            // Reset transform on mouse leave
             card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1,1,1)';
           });
         });
@@ -408,7 +420,7 @@
       function renderPages(files) {
         if (files.length > 0) {
           grid.innerHTML = files.map(createPageCard).join('');
-          init3dCards(); // Re-initialize 3D effect for new cards
+          init3dCards();
           pagesLoaded = true;
         } else {
           grid.innerHTML = '<p class="text-muted text-center md:col-span-2 lg:col-span-3 py-10">No HTML pages found in the /html directory.</p>';
@@ -422,23 +434,22 @@
         grid.innerHTML = loaderHTML;
 
         try {
-          console.log("Fetching from URL:", PAGES_DIR_API); // Debug log
+          console.log("Fetching from URL:", PAGES_DIR_API);
           const response = await fetch(PAGES_DIR_API);
-          console.log("Response status:", response.status); // Debug log
+          console.log("Response status:", response.status);
           if (!response.ok) {
-            const errorText = await response.text(); // Get error details
+            const errorText = await response.text();
             console.error("API Error Response:", errorText);
             throw new Error(`GitHub API error: ${response.status} - ${errorText}`);
           }
 
           const data = await response.json();
-          console.log("Fetched data:", data); // Debug log
+          console.log("Fetched data:", data);
           htmlFilesCache = data.filter(f => f.type === 'file' && f.name.endsWith('.html'));
-          console.log("Filtered HTML files:", htmlFilesCache); // Debug log
+          console.log("Filtered HTML files:", htmlFilesCache);
           renderPages(htmlFilesCache);
         } catch (err) {
           console.error("Failed to load pages:", err);
-          // Use Tailwind red for error message
           grid.innerHTML = `<p class="text-red-400 text-center md:col-span-2 lg:col-span-3 py-10">Error fetching sheets: ${err.message}. Check the console for details.</p>`;
           pagesLoaded = false;
         } finally {
