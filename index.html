@@ -3,186 +3,118 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Reddit Hustle Project v1.0</title>
+  <title>Reddit Hustle Project v1.1</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500;700&family=Ubuntu+Mono:wght@400;700&display=swap" rel="stylesheet">
   <style type="text/tailwindcss">
     @layer base {
       :root {
-        /* Light Theme (Default - Bubbly Reddit) */
-        --bg-primary: 248 250 252; /* bg-slate-50 */
-        --bg-secondary: 255 255 255; /* white */
-        --bg-card: 255 255 255; /* white */
-        --text-primary: 15 23 42; /* slate-900 */
-        --text-secondary: 100 116 139; /* slate-500 */
-        --accent-primary: 220 38 38; /* red-600 */
-        --accent-secondary: 248 113 113; /* red-400 */
-        --border-color: 226 232 240; /* slate-200 */
-        --blob-color-1: 254 202 202; /* red-200 */
-        --blob-color-2: 254 242 242; /* red-50 */
-        --sync-button-bg: 220 38 38; /* red-600 */
-        --sync-button-hover: 185 28 28; /* red-700 */
-        --sync-button-text: 255 255 255; /* white */
-        --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
-        --card-hover-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        --fab-bg: 220 38 38; /* red-600 */
-        --fab-hover: 185 28 28; /* red-700 */
-        --fab-icon: 255 255 255; /* white */
-        --particle-color: 220 38 38; /* red-600 */
-        --line-color: 226 232 240; /* slate-200 */
-        
+        /* Light Theme */
+        --bg-primary: 248 250 252;
+        --accent-primary: 220 38 38;
+        --accent-secondary: 248 113 113;
+        --text-primary: 15 23 42;
+        --text-secondary: 100 116 139;
+        --blob-color-1: 254 202 202;
+        --blob-color-2: 254 242 242;
+
         /* Dark Theme */
         &.theme-dark {
-            --bg-primary: 15 23 42; /* slate-900 */
-            --bg-secondary: 30 41 59; /* slate-800 */
-            --bg-card: 15 23 42; /* slate-900 */
-            --text-primary: 241 245 249; /* slate-100 */
-            --text-secondary: 203 213 225; /* slate-300 */
-            --accent-primary: 248 113 113; /* red-400 */
-            --accent-secondary: 254 202 202; /* red-200 */
-            --border-color: 51 65 85; /* slate-700 */
-            --blob-color-1: 55 48 63; /* slate-800 + purple tint */
-            --blob-color-2: 39 37 47; /* slate-900 + purple tint */
-            --sync-button-bg: 248 113 113; /* red-400 */
-            --sync-button-hover: 251 113 133; /* red-300 */
-            --sync-button-text: 15 23 42; /* slate-900 */
-            --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
-            --card-hover-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.15);
-            --fab-bg: 248 113 113; /* red-400 */
-            --fab-hover: 251 113 133; /* red-300 */
-            --fab-icon: 15 23 42; /* slate-900 */
-            --particle-color: 248 113 113; /* red-400 */
-            --line-color: 51 65 85; /* slate-700 */
+          --bg-primary: 15 23 42;
+          --accent-primary: 248 113 113;
+          --accent-secondary: 254 202 202;
+          --text-primary: 241 245 249;
+          --text-secondary: 203 213 225;
+          --blob-color-1: 55 48 63;
+          --blob-color-2: 39 37 47;
         }
 
         /* Matrix Theme */
         &.theme-matrix {
-            --bg-primary: 0 10 0; /* Very dark green */
-            --bg-secondary: 0 20 0; /* Darker green */
-            --bg-card: 0 15 0; /* Card green */
-            --text-primary: 0 255 100; /* Bright green */
-            --text-secondary: 0 180 70; /* Muted green */
-            --accent-primary: 0 255 150; /* Neon green */
-            --accent-secondary: 0 200 100; /* Secondary green */
-            --border-color: 0 80 40; /* Dark green border */
-            --blob-color-1: 0 40 20; /* Dark blob */
-            --blob-color-2: 0 25 10; /* Darker blob */
-            --sync-button-bg: 0 255 100; /* Bright green */
-            --sync-button-hover: 0 200 80; /* Hover green */
-            --sync-button-text: 0 10 0; /* Very dark green */
-            --card-shadow: 0 0 10px rgba(0, 255, 100, 0.2);
-            --card-hover-shadow: 0 0 20px rgba(0, 255, 100, 0.4);
-            --fab-bg: 0 255 100; /* Bright green */
-            --fab-hover: 0 200 80; /* Hover green */
-            --fab-icon: 0 10 0; /* Very dark green */
-            --particle-color: 0 255 100; /* Bright green */
-            --line-color: 0 80 40; /* Dark green */
+          --bg-primary: 0 10 0;
+          --accent-primary: 0 255 100;
+          --accent-secondary: 0 200 80;
+          --text-primary: 0 255 100;
+          --text-secondary: 0 180 70;
+          --blob-color-1: 0 40 20;
+          --blob-color-2: 0 25 10;
         }
 
         /* Reddit Theme */
         &.theme-reddit {
-            --bg-primary: 246 247 248; /* Off-white */
-            --bg-secondary: 255 255 255; /* White */
-            --bg-card: 255 255 255; /* White */
-            --text-primary: 26 26 27; /* Dark gray */
-            --text-secondary: 120 124 126; /* Gray */
-            --accent-primary: 255 69 0; /* Red-Orange (Reddit) */
-            --accent-secondary: 255 120 50; /* Orange-Red */
-            --border-color: 237 239 241; /* Light gray */
-            --blob-color-1: 255 200 180; /* Peach */
-            --blob-color-2: 255 230 220; /* Light Peach */
-            --sync-button-bg: 255 69 0; /* Red-Orange */
-            --sync-button-hover: 220 50 0; /* Darker Red-Orange */
-            --sync-button-text: 255 255 255; /* White */
-            --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-            --card-hover-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --fab-bg: 255 69 0; /* Red-Orange */
-            --fab-hover: 220 50 0; /* Darker Red-Orange */
-            --fab-icon: 255 255 255; /* White */
-            --particle-color: 255 69 0; /* Red-Orange */
-            --line-color: 237 239 241; /* Light gray */
+          --bg-primary: 246 247 248;
+          --accent-primary: 255 69 0;
+          --accent-secondary: 255 120 50;
+          --text-primary: 26 26 27;
+          --text-secondary: 120 124 126;
+          --blob-color-1: 255 200 180;
+          --blob-color-2: 255 230 220;
         }
       }
     }
 
     @layer components {
-      .background-blobs {
-        @apply fixed inset-0 overflow-hidden -z-10;
+      /* Animated background gradient */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(120deg, #0f2027, #203a43, #2c5364);
+        background-size: 400% 400%;
+        animation: gradientShift 20s ease infinite;
+        z-index: -20;
       }
+      @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+
+      /* Blobs now pulse */
       .blob1, .blob2 {
-        @apply absolute rounded-full opacity-50 blur-3xl;
+        @apply absolute rounded-full opacity-40 blur-3xl;
+        animation: pulseBlob 8s ease-in-out infinite alternate;
       }
-      .blob1 {
-        width: 600px;
-        height: 600px;
-        top: -200px;
-        left: -200px;
-        background: rgb(var(--blob-color-1));
+      @keyframes pulseBlob {
+        from { transform: scale(1); opacity: 0.4; }
+        to { transform: scale(1.2); opacity: 0.6; }
       }
-      .blob2 {
-        width: 500px;
-        height: 500px;
-        bottom: -150px;
-        right: -150px;
-        background: rgb(var(--blob-color-2));
+
+      /* Futuristic loader */
+      .loader-svg circle {
+        stroke: rgba(var(--accent-primary), 0.4);
       }
-      .content-wrapper {
-        @apply min-h-screen;
-        background: rgb(var(--bg-primary));
-      }
-      .highlight {
-        color: rgb(var(--accent-primary));
-      }
-      .text-muted {
-        color: rgb(var(--text-secondary));
-      }
-      .sync-button {
-        background: rgb(var(--sync-button-bg));
-        color: rgb(var(--sync-button-text));
-        @apply px-6 py-3 rounded-full shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl;
-      }
-      .sync-button:hover {
-        background: rgb(var(--sync-button-hover));
-      }
-      .page-card {
-        background: rgb(var(--bg-card));
-        color: rgb(var(--text-primary));
-        border: 1px solid rgb(var(--border-color));
-        box-shadow: var(--card-shadow);
-        @apply block rounded-xl overflow-hidden transition-all duration-300 flex flex-col h-full;
-      }
-      .page-card:hover {
-        transform: translateY(-5px);
-        box-shadow: var(--card-hover-shadow);
-      }
-      #theme-fab-container {
-        @apply fixed bottom-6 right-6 z-50;
-      }
-      #theme-fab-toggle {
-        background: rgb(var(--fab-bg));
-        color: rgb(var(--fab-icon));
-        @apply p-4 rounded-full shadow-lg cursor-pointer transition-all duration-300 hover:scale-110 hover:shadow-xl;
-      }
-      #theme-fab-toggle:hover {
-        background: rgb(var(--fab-hover));
-      }
-      #theme-fab-icon {
-        @apply w-6 h-6;
+      .loader-svg path {
+        stroke: rgb(var(--accent-primary));
+        filter: drop-shadow(0 0 8px rgb(var(--accent-primary)));
       }
       .loader-svg {
-        @apply w-16 h-16 mx-auto text-[rgb(var(--accent-primary))];
+        animation: spin 2s linear infinite, pulseStroke 1.5s ease-in-out infinite alternate;
       }
-      .track {
-        stroke: rgb(var(--border-color));
+      @keyframes pulseStroke {
+        from { stroke-width: 2; }
+        to { stroke-width: 3.5; }
       }
-      .spinner {
-        stroke: rgb(var(--accent-primary));
-        transform-origin: center;
-        animation: spin 1s linear infinite;
+      @keyframes spin { 100% { transform: rotate(360deg); } }
+
+      /* Smooth theme transitions */
+      body, .page-card, .sync-button, .highlight, .highlight-text {
+        transition: background 0.6s ease, color 0.6s ease, box-shadow 0.6s ease;
       }
-      @keyframes spin {
-        to { transform: rotate(360deg); }
+
+      /* Floating Particles */
+      .particle {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(var(--accent-primary), 0.5);
+        box-shadow: 0 0 10px rgba(var(--accent-primary), 0.8);
+        animation: floatUp 15s linear infinite;
+      }
+      @keyframes floatUp {
+        0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
+        30% { opacity: 1; }
+        100% { transform: translateY(-20vh) scale(1.2); opacity: 0; }
       }
     }
   </style>
@@ -201,19 +133,19 @@
 </head>
 <body class="antialiased font-sans text-[rgb(var(--text-primary))]">
   <div class="background-blobs">
-    <div class="blob1"></div>
-    <div class="blob2"></div>
+    <div class="blob1 w-[600px] h-[600px] top-[-200px] left-[-200px]" style="background: rgb(var(--blob-color-1))"></div>
+    <div class="blob2 w-[500px] h-[500px] bottom-[-150px] right-[-150px]" style="background: rgb(var(--blob-color-2))"></div>
   </div>
   <div id="particles-js" class="fixed inset-0 -z-10"></div>
+  
+  <div id="particles-container"></div>
 
   <div class="content-wrapper container mx-auto p-4 md:p-8 max-w-6xl">
-    <header class="text-center mb-12 pt-8 sm:pt-16">
-      <h1 class="text-4xl md:text-6xl font-bold">Reddit Project</h1>
-      <p class="text-lg mt-2 text-muted">An automated index of guides, tools, and notes.</p>
+    <header class="text-center mb-12 pt-12">
+      <h1 class="text-5xl md:text-6xl font-bold highlight drop-shadow-lg">Reddit Hustle Project</h1>
+      <p class="text-lg mt-3 text-muted">An automated index of guides, tools, and notes.</p>
       <div class="mt-8">
-        <button id="sync-button" class="sync-button font-bold text-lg">
-          Sync Sheets
-        </button>
+        <button id="sync-button" class="sync-button font-bold text-lg px-6 py-3 rounded-full">Sync Sheets</button>
       </div>
     </header>
 
@@ -229,195 +161,42 @@
   </div>
 
   <!-- Theme Switcher FAB -->
-  <div id="theme-fab-container">
-    <button id="theme-fab-toggle" title="Switch Theme">
-      <svg id="theme-fab-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M4.098 19.902a3.75 3.75 0 005.304 0l6.401-6.402a3.75 3.75 0 00-5.304-5.304L4.098 14.6c-.39.39-.39 1.023 0 1.414l.495.495a1.875 1.875 0 010 2.652l-.495.495a1.875 1.875 0 01-2.652 0l-.495-.495a1.875 1.875 0 010-2.652l6.402-6.401a3.75 3.75 0 005.304 5.304l-6.402 6.401a3.75 3.75 0 00-5.304 0z" />
+  <div id="theme-fab-container" class="fixed bottom-6 right-6">
+    <button id="theme-fab-toggle" class="p-4 rounded-full bg-[rgb(var(--accent-primary))] shadow-lg text-[rgb(var(--bg-primary))] transition-transform hover:scale-110 hover:shadow-xl">
+      <svg id="theme-fab-icon" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
       </svg>
     </button>
   </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const GITHUB_REPO = 'onqu3st/redditPages';
-      const PAGES_DIR_API = `https://api.github.com/repos/${GITHUB_REPO}/contents/html`;
-
-      const grid = document.getElementById('pages-grid');
-      const syncButton = document.getElementById('sync-button');
-      let pagesLoaded = false;
-      let htmlFilesCache = [];
-
-      const loaderHTML = `
-        <div class="loader-container">
-          <svg class="loader-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle class="track" cx="12" cy="12" r="10" stroke-width="2"/>
-            <path class="spinner" d="M12 2A10 10 0 0 1 22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-          </svg>
-          <p class="text-xl highlight mt-4">Syncing with Repository...</p>
-        </div>`;
-
-      function formatTitle(filename) {
-        return filename
-          .replace('.html', '')
-          .replace(/\[(.*?)\]/g, (m, p1) => `${p1.toUpperCase()}: `)
-          .replace(/-/g, ' ')
-          .split(' ')
-          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(' ');
+      /* Particle generator */
+      const container = document.getElementById("particles-container");
+      for (let i = 0; i < 40; i++) {
+        let p = document.createElement("div");
+        p.className = "particle";
+        let size = Math.random() * 6 + 3;
+        p.style.width = size + "px";
+        p.style.height = size + "px";
+        p.style.left = Math.random() * 100 + "vw";
+        p.style.animationDuration = (10 + Math.random() * 10) + "s";
+        p.style.animationDelay = (Math.random() * 5) + "s";
+        container.appendChild(p);
       }
 
-      function createDescription(title) {
-        return `A technical guide or note on the topic of "${title}". Click to view the full page.`;
-      }
-
-      function createPageCard(page) {
-        const title = formatTitle(page.name);
-        const description = createDescription(title);
-        
-        // Get theme colors for placeholder
-        const bgColor = getComputedStyle(document.documentElement)
-            .getPropertyValue('--bg-card').trim().replace(/ /g, '');
-        const textColor = getComputedStyle(document.documentElement)
-            .getPropertyValue('--accent-primary').trim().replace(/ /g, '');
-            
-        const imageUrl = `https://placehold.co/600x400/${bgColor}/${textColor}?text=${encodeURIComponent(title.split(':')[0] || title)}&font=ubuntu`;
-
-        return `
-          <a href="https://onqu3st.github.io/redditPages/html/${page.name}" target="_blank" rel="noopener noreferrer" class="page-card no-underline group">
-            <div class="overflow-hidden">
-              <img src="${imageUrl}" alt="Placeholder for ${title}" class="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105">
-            </div>
-            <div class="p-6 flex flex-col flex-grow">
-              <h3 class="text-xl font-bold highlight">${title}</h3>
-              <p class="text-muted mt-2 flex-grow">${description}</p>
-              <p class="text-sm mt-4 font-mono text-right highlight">View Sheet &rarr;</p>
-            </div>
-          </a>
-        `;
-      }
-
-      function renderPages(files) {
-        if (files.length > 0) {
-          grid.innerHTML = files.map(createPageCard).join('');
-          pagesLoaded = true;
-        } else {
-          grid.innerHTML = '<p class="text-muted text-center md:col-span-2 lg:col-span-3">No HTML pages found in the /html directory.</p>';
-          pagesLoaded = false;
-        }
-      }
-
-      async function loadPages() {
-        syncButton.disabled = true;
-        syncButton.textContent = 'Syncing...';
-        grid.innerHTML = loaderHTML;
-
-        try {
-          const response = await fetch(PAGES_DIR_API);
-          if (!response.ok) throw new Error(`GitHub API error: ${response.status}`);
-
-          const data = await response.json();
-          htmlFilesCache = data.filter(f => f.type === 'file' && f.name.endsWith('.html'));
-          renderPages(htmlFilesCache);
-        } catch (err) {
-          console.error("Failed to load pages:", err);
-          grid.innerHTML = `<p class="text-red-400 text-center md:col-span-2 lg:col-span-3">Error fetching sheets. Check the console for details.</p>`;
-          pagesLoaded = false;
-        } finally {
-          syncButton.disabled = false;
-          syncButton.textContent = 'Sync Sheets';
-        }
-      }
-
-      syncButton.addEventListener('click', loadPages);
-
-      /* Theme Switcher */
+      /* Theme Switching */
       const themes = ['theme-light', 'theme-dark', 'theme-matrix', 'theme-reddit'];
-      const themeNames = {
-        'theme-light': 'Bubbly Light',
-        'theme-dark': 'Bubbly Dark',
-        'theme-matrix': 'Matrix',
-        'theme-reddit': 'Reddit'
-      };
-      const themeData = {
-        'theme-light': { particleColor: '#dc2626', lineColor: '#e2e8f0' }, // red-600, slate-200
-        'theme-dark': { particleColor: '#f87171', lineColor: '#334155' },  // red-400, slate-700
-        'theme-matrix': { particleColor: '#00ff64', lineColor: '#005028' }, // bright green, dark green
-        'theme-reddit': { particleColor: '#ff4500', lineColor: '#edeff1' }  // reddit orange, light gray
-      };
-      let currentThemeIndex = 0;
-
-      function loadParticles(themeClass) {
-        // Extract theme name from class (e.g., 'theme-light' -> 'light')
-        const theme = themeClass.replace('theme-', '');
-        
-        if (window.pJSDom?.length) {
-          window.pJSDom[0].pJS.fn.vendors.destroypJS();
-          window.pJSDom = [];
-        }
-        
-        const config = {
-          particles: {
-            number: { value: 50, density: { enable: true, value_area: 800 } },
-            color: { value: themeData[themeClass].particleColor },
-            shape: { type: "circle" },
-            opacity: { value: 0.5, random: true },
-            size: { value: 3, random: true },
-            line_linked: { 
-                enable: true, 
-                distance: 150, 
-                color: themeData[themeClass].lineColor, 
-                opacity: 0.4, 
-                width: 1 
-            },
-            move: { 
-                enable: true, 
-                speed: (theme === 'matrix') ? 2 : 1, 
-                direction: "none",
-                random: true,
-                straight: false,
-                out_mode: "out",
-                bounce: false
-            }
-          },
-          interactivity: { 
-              detect_on: "canvas", 
-              events: { 
-                  onhover: { enable: true, mode: "grab" },
-                  onclick: { enable: true, mode: "push" },
-                  resize: true
-              },
-              modes: {
-                  grab: { distance: 140, line_linked: { opacity: 1 } },
-                  push: { particles_nb: 4 }
-              }
-          },
-          retina_detect: true
-        };
-        
-        particlesJS('particles-js', config);
+      let idx = themes.indexOf(localStorage.getItem('onqu3st-theme')) || 0;
+      function setTheme(theme) {
+        document.documentElement.className = theme;
+        localStorage.setItem('onqu3st-theme', theme);
       }
-
-      function setTheme(themeClass) {
-        document.documentElement.className = themeClass;
-        localStorage.setItem('onqu3st-theme', themeClass);
-        currentThemeIndex = themes.indexOf(themeClass);
-        loadParticles(themeClass);
-        if (pagesLoaded) renderPages(htmlFilesCache);
-      }
-
-      document.getElementById('theme-fab-toggle').addEventListener('click', () => {
-        currentThemeIndex = (currentThemeIndex + 1) % themes.length;
-        const newTheme = themes[currentThemeIndex];
-        setTheme(newTheme);
-        
-        // Optional: Show theme name on switch
-        const fab = document.getElementById('theme-fab-toggle');
-        fab.title = `Switch Theme (${themeNames[newTheme]})`;
-      });
-
-      const savedTheme = localStorage.getItem('onqu3st-theme') || 'theme-light';
-      setTheme(savedTheme);
-      document.getElementById('theme-fab-toggle').title = `Switch Theme (${themeNames[savedTheme]})`;
+      setTheme(themes[idx]);
+      document.getElementById('theme-fab-toggle').onclick = () => {
+        idx = (idx + 1) % themes.length;
+        setTheme(themes[idx]);
+      };
     });
   </script>
 </body>
